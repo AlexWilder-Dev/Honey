@@ -35,6 +35,11 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script>
+      // If Pages is serving the repository root instead of the built docs/ folder, hop across to the build.
+      if (location.hostname.endsWith('github.io') && document.querySelector('script[src$="main.tsx"]'))
+        location.replace('docs/' + location.search + location.hash);
+    </script>
+    <script>
     (() => {
       try {
         if (location.hash === '#me') localStorage.setItem('me', '1');
