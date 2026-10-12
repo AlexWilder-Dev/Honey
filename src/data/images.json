@@ -1,0 +1,186 @@
+{
+  "hero-glass": {
+    "alt": "Two orange spritzes clinking across the bar under low amber light",
+    "width": 1500,
+    "height": 2249,
+    "widths": [
+      480,
+      800,
+      1200,
+      1500
+    ],
+    "fallback": 800,
+    "blur": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAABQBACdASoQABgAPu1iqk2ppaQiMAgBMB2JbAC7MoADK5wGDKAhyoZrkQ6AAP70MtbOuCCqcM1u3Ll/N8VuxXWCRP2mWJoByYO6e7hu10fksiorT56FlFJsfgwN4ZasCG2L/ElBxB39TPUrUUmyDWfdfz3SfQ50uMJhGueyB+fSiAoX+UVQZLlG6aLfkW3QOLD9lJ8C1ylgAA=="
+  },
+  "hero-plates": {
+    "alt": "A table covered in sharing plates, seen from above",
+    "width": 1152,
+    "height": 2048,
+    "widths": [
+      480,
+      800,
+      1152
+    ],
+    "fallback": 800,
+    "blur": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAACQBACdASoQABwAPu1iqU2ppaQiMAgBMB2JZACdBa0xgAfbl2UR3aE38sAQToAA++huoSI3A2QGXmFAHUFoekrRT1dlDUCFjX8mZrurLVgc5cwMPVdMVW0Pv8m08xclN9DA4P8/laY0luzybvqT3QxFgwUu0u21n8pfJHPKhJSMuEVDOds7btshqMOHzkP0sAA="
+  },
+  "kitchen": {
+    "alt": "A pizza and a bowl of ravioli on a wooden table",
+    "width": 1500,
+    "height": 2249,
+    "widths": [
+      480,
+      800,
+      1200,
+      1500
+    ],
+    "fallback": 800,
+    "blur": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAABQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JagCdMoMrZEma8VzofM8JQsmgAP7y207umea+IpnJVP4yIa35V4mh/E4FId9w2X8HiZe0nPTczkmpQpPm247U2bsxhnEDVa8ISOznQ4/L5T8C+0qLfXRolJMuPNMYe/NxTFruvb/N4fSKewyiwdRBlPgE2AAA"
+  },
+  "bar": {
+    "alt": "A spritz on a candlelit table with a guest smiling behind it",
+    "width": 1500,
+    "height": 2249,
+    "widths": [
+      480,
+      800,
+      1200,
+      1500
+    ],
+    "fallback": 800,
+    "blur": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAAAwBACdASoQABgAPu1iqU2ppaOiMAgBMB2JZACsAB6NbnALXy49Ka2ZLAAA/uxI44C9SoK0Q1QnLdW09dQ4lppJDBSK7QLC7B96H58IjfRnpKab1dZBoh5fwUJPOMMqIW3/pDUU1ioIq7Mk930yywod+Sb7Jue/jgpQvGtswBzknj5xXLAz4IQJHTdHLCUwgaGD1oV1nRrtvyAA"
+  },
+  "backbar": {
+    "alt": "The back bar glowing amber, rope lanterns hanging above the shakers",
+    "width": 1067,
+    "height": 1600,
+    "widths": [
+      480,
+      800,
+      1067
+    ],
+    "fallback": 800,
+    "blur": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAACQBACdASoQABgAPu1iqk2ppaQiMAgBMB2JbACdMoR3ACIRAWawbjyEdNwgvoAA/uxVn19jWnHJ5RmP483PaVEm8PueOC1AkXdHKBm2GSsGXCfxTFzOI4qCzlGS5s5ixDWfenbgfJfu8iesVb1omL3dScfC3xDO1IvQYz1GOKQKcQXZKvy3xq/nafnZOcYAAAA="
+  },
+  "espresso": {
+    "alt": "An espresso martini on the bar",
+    "width": 590,
+    "height": 787,
+    "widths": [
+      480,
+      590
+    ],
+    "fallback": 590,
+    "blur": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAAAwBACdASoQABUAPu1iqU2ppaQiMAgBMB2JZACsACF58gqXb5wNwajTYgAA/vQlNhrdYlCBfEkC7wpQUOcvwQfRb4SGhWgnJ6Bq39k/vb0hWDsID/yJrBLsfN/50BrlTUaS5c7mLOGd8zoFDrpOi9ek30AAAA=="
+  },
+  "pizza": {
+    "alt": "A pizza on the bar counter",
+    "width": 590,
+    "height": 787,
+    "widths": [
+      480,
+      590
+    ],
+    "fallback": 590,
+    "blur": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAABQBACdASoQABUAPu1iqU2ppaQiMAgBMB2JbACdMoR3AB5qdllGeD+jSl2AAP7vig4y3BUed1xAxXlUI9x17jhCqRw7Hn3PnJTuo1Kg6jOm92pfS/+RLaO+NiJFuKxV0vXNjf8tD4D3YfRfYcljLOaCZcQG0XSkdSzkkRh+gumCE+0tADoAAA=="
+  },
+  "plate": {
+    "alt": "A plated dish with dressed leaves on the bar",
+    "width": 590,
+    "height": 787,
+    "widths": [
+      480,
+      590
+    ],
+    "fallback": 590,
+    "blur": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAABQBACdASoQABUAPu1iqk2ppaQiMAgBMB2JYgCdACHwovIaOVMwv7bGqkAAAP7kXp3/emxl8Qrw49V8dqjbXmcs3zGmzx+KxWk2Lo/DzIW8lR0Gl4GvuhH4Gsry5zk9sNF7Airk+3Prx3AA"
+  },
+  "courtyard-day": {
+    "alt": "The courtyard in sunshine: green chairs, wooden tables and old brick walls",
+    "width": 1500,
+    "height": 926,
+    "widths": [
+      480,
+      800,
+      1200,
+      1500
+    ],
+    "fallback": 800,
+    "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADQAQCdASoQAAoAA4BaJQBWABbOexGGAAD+8aMxH/ZeFyEEE3uUpJ2M630MZxdMv/Wc3Ri8D/IBg+/CUzSq/9fHjpIHIAAA"
+  },
+  "palms": {
+    "alt": "Palm trees in the courtyard against the sky",
+    "width": 1500,
+    "height": 1167,
+    "widths": [
+      480,
+      800,
+      1200,
+      1500
+    ],
+    "fallback": 800,
+    "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADQAQCdASoQAAwAA4BaJYwCdACRVzOncAD+5Srh58x/hqQutIJHqcAQZqEP5X4m2rlzj/aK0pfDz0Noo5vb8UoTUlUYQAAA"
+  },
+  "upstairs": {
+    "alt": "An evening dining room under old timber beams and fairy lights",
+    "width": 1500,
+    "height": 1126,
+    "widths": [
+      480,
+      800,
+      1200,
+      1500
+    ],
+    "fallback": 800,
+    "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQAAwAA4BaJZgCdADciJFzxgAA/s9yAsPg9IFHBwHko0xz2+eYgsGiXREJVLTmxlrcG8tVA9eDRGUOLmx+ecyQAAA="
+  },
+  "upstairs-room": {
+    "alt": "Tables under the roof beams, a wall of birch branches lit from below",
+    "width": 1500,
+    "height": 1001,
+    "widths": [
+      480,
+      800,
+      1200,
+      1500
+    ],
+    "fallback": 800,
+    "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADwAQCdASoQAAsAA4BaJZgCdAEQ+76eDYAA/veHCQHGclBem5rOU42ZposuwHrxOJ87r0Rc0kX65AcBJPBcj0fg5G1+AAAA"
+  },
+  "courtyard-night": {
+    "alt": "The courtyard at night under globe lamps",
+    "width": 1500,
+    "height": 2249,
+    "widths": [
+      480,
+      800,
+      1200,
+      1500
+    ],
+    "fallback": 800,
+    "blur": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAABQBACdASoQABgAPu1iqU2ppaQiMAgBMB2JYgCxDHADA1oIDfRewM+EUcSAAP7yrim33wMKMjA+nw6DmNsqqVf29r4fouTXj4IgraXW9RQ76pyYW07zgbsLzzN/QiqUEu5s8wGRnuI1CdHGR7pVeLaCkxZH23nC3Nd0Gy8TBOHjqtu77b5nAAAA"
+  },
+  "cheers": {
+    "alt": "A guest laughing over a table of drinks in the courtyard at night",
+    "width": 1500,
+    "height": 2249,
+    "widths": [
+      480,
+      800,
+      1200,
+      1500
+    ],
+    "fallback": 800,
+    "blur": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAAAwBACdASoQABgAPu1iqU2ppaQiMAgBMB2JaACw7CHf/D/Z4WwjmrjPVgAA/vQgqwy4xDaiovuTuV+7S3g4gkkY3cRm/gNu+KrVVOljCATWljN0YPvLVlPYlnSonWcKDZ63QtGQum2u4CVO69y8RNuEyzAaPvQwKE4AAA=="
+  },
+  "door": {
+    "alt": "The yellow front door of 42 Silver Street at dusk",
+    "width": 317,
+    "height": 563,
+    "widths": [
+      317
+    ],
+    "fallback": 317,
+    "blur": "data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAADQAwCdASoQAB0APu1kqk4ppaQiMAgBMB2JQBdgA6W2rNi8dAc91QAA/qZltVPHZMPCfGXFaY1VGgb0QCH3VUj3dS5+qya0sFpPacHZgACSHaVP8VrX46jb0OcI697Qw3SK/OyWGO4dSEAbPcSYWHtpR1RMv81buZJpwOaipva0tPm2pgA="
+  }
+}

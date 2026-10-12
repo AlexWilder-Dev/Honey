@@ -1,0 +1,102 @@
+.menu {
+  padding-bottom: var(--section-y);
+  min-height: 100svh;
+  background:
+    radial-gradient(50% 30% at 100% 0%, rgb(240 197 58 / 0.22), transparent 70%),
+    var(--paper);
+}
+.menu__head {
+  display: grid;
+  gap: 18px;
+  padding-block: clamp(48px, 7vw, 110px) clamp(28px, 3vw, 40px);
+}
+.menu__title {
+  font-size: clamp(3.2rem, 1.8rem + 5.4vw, 7.4rem);
+}
+.menu__how {
+  display: block;
+  max-width: 62ch;
+  color: var(--soft);
+  font-size: 0.95rem;
+}
+.menu__how .course__plus {
+  width: 22px;
+  height: 22px;
+  font-size: 0.9rem;
+  vertical-align: -0.35em;
+  margin-inline: 2px;
+}
+
+.tabs-bar {
+  position: sticky;
+  top: var(--chrome-top);
+  z-index: 20;
+  background: rgb(244 236 221 / 0.92);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-block: 1px solid var(--rule-paper);
+}
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px 14px;
+  padding-block: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-inline: calc(-1 * var(--gutter));
+  padding-inline: var(--gutter);
+}
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+.tabs__group {
+  display: flex;
+  gap: 4px;
+}
+.tabs__tab {
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 2px;
+  font: 500 0.98rem/1 var(--sans);
+  white-space: nowrap;
+  color: var(--ink-soft);
+  transition: background 400ms var(--pour), color 400ms var(--pour);
+}
+.tabs__tab:hover {
+  color: var(--ink);
+  background: rgb(29 22 14 / 0.06);
+}
+.tabs__tab.is-on {
+  background: var(--ink);
+  color: var(--door);
+}
+.tabs__amp {
+  font-size: 2rem;
+  flex: none;
+}
+
+.menu__panel {
+  padding-top: 12px;
+}
+.menu__panel--many {
+  columns: 2;
+  column-gap: clamp(40px, 6vw, 96px);
+}
+.menu__panel--one {
+  max-width: 760px;
+}
+.menu__section {
+  break-inside: avoid-column;
+  padding-top: 44px;
+}
+.menu__section-title {
+  margin-bottom: 10px;
+  font: italic 400 clamp(1.7rem, 1.4rem + 1vw, 2.2rem) / 1.1 var(--serif);
+  color: var(--honey-deep);
+}
+
+@media (max-width: 899px) {
+  .menu__panel--many {
+    columns: 1;
+  }
+}
