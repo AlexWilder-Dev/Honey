@@ -1,6 +1,6 @@
 import { AnimatePresence, m } from 'framer-motion'
 import { useEffect, useRef, type KeyboardEvent } from 'react'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { DishRow } from '../components/DishRow'
 import { menu, menuTagline } from '../data/menu'
 import { pour } from '../lib/motion'
@@ -52,16 +52,14 @@ export function Menu() {
   )
 
   return (
-    <main className="menu on-paper" id="main">
+    <main className="menu on-light" id="main">
       <header className="wrap menu__head">
-        <p className="kicker">The menu</p>
-        <h1 className="display title menu__title">
-          Plates <span className="amp">&amp;</span> glasses
-        </h1>
-        <p className="lede">{menuTagline}.</p>
+        <p className="dashed dashed--left">the menu</p>
+        <h1 className="h-caps h-xl">Plates, pizzas &amp; the Hive List</h1>
+        <p className="lead">“{menuTagline}.”</p>
         <p className="menu__how">
-          Tap <span className="course__plus" aria-hidden="true">+</span> on anything to put it on your table, then book it in one go. V means vegetarian. Allergies or
-          dietary needs? Have a word with the team before you order.
+          Tap + on anything to put it on your table, then book it in one go. V is vegetarian. Allergies or dietary needs? Have a word with
+          the team before you order.
         </p>
       </header>
 
@@ -69,11 +67,12 @@ export function Menu() {
         <div className="wrap">
           <div className="tabs" role="tablist" aria-label="Menu sections" ref={tabs} onKeyDown={onKey}>
             <div className="tabs__group">{plates.map(tabButton)}</div>
-            <span className="tabs__amp amp" aria-hidden="true">
-              &amp;
-            </span>
+            <span className="tabs__sep" aria-hidden="true" />
             <div className="tabs__group">{glasses.map(tabButton)}</div>
           </div>
+          <Link to="/christmas" className="tabs__xmas">
+            Christmas menu →
+          </Link>
         </div>
       </div>
 

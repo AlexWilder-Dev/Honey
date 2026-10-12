@@ -5,10 +5,11 @@ import { useUi } from '../state/ui'
 import { Sheet, SheetClose } from './Sheet'
 
 const links: [SectionId, string][] = [
+  ['on', 'What’s on'],
   ['eat', 'Eat'],
   ['drink', 'Drink'],
-  ['spaces', 'Courtyard & upstairs'],
-  ['find', 'Find us'],
+  ['house', 'The house'],
+  ['visit', 'Visit'],
 ]
 
 export function MobileNav() {
@@ -34,9 +35,12 @@ export function MobileNav() {
         <Link to="/menu" className="mnav__link" onClick={close}>
           The full menu
         </Link>
+        <Link to="/christmas" className="mnav__link" onClick={close}>
+          Christmas
+        </Link>
       </nav>
       <div className="mnav__foot">
-        <button type="button" className="btn btn--door" onClick={() => openBooking()}>
+        <button type="button" className="btn btn--yellow" onClick={() => openBooking()}>
           Book a table
         </button>
         <p>

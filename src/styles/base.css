@@ -1,52 +1,45 @@
 /*
- * Palette from the building and the bar: the yellow front door and awnings,
- * charcoal paint, parchment from their printed menus, the green courtyard
- * chairs, and the amber light the back bar gives off at night.
+ * Colours are taken off the building and their brand: the black render of the
+ * ground floor, the yellow of the awnings and front door (their brand yellow),
+ * the white portico and glazing bars, the stone pavement of Silver Street, the
+ * red brick upstairs and the lime-green courtyard chairs.
  */
 :root {
-  --night: #15100a;
-  --night-2: #1d160e;
-  --night-3: #2a2017;
-  --paper: #f4ecdd;
-  --paper-2: #ebdfc9;
-  --ink: #1d160e;
-  --ink-soft: #5c4f40;
-  --cream: #f5ead6;
-  --cream-soft: #c5b49a;
-  --honey: #e9a53f;
-  --honey-hi: #f7c66b;
-  --honey-deep: #9a5a0f;
-  --door: #f0c53a;
-  --door-deep: #d9aa17;
-  --leaf: #a7b23b;
-  --leaf-deep: #5f6a12;
+  --black: #111110;
+  --render: #1a1a19;
+  --yellow: #ffc700;
+  --yellow-sun: #ffd640;
+  --yellow-shade: #e3a900;
+  --white: #ffffff;
+  --stone: #efece5;
+  --stone-2: #e2ddd2;
+  --stone-dark: #b9b3a6;
+  --brick: #b0532f;
+  --lime: #b5c72f;
+  --lime-dark: #5c6b00;
+  --grey: #5d5a54;
+  --grey-light: #a19c92;
 
-  --rule-dark: rgb(245 234 214 / 0.14);
-  --rule-paper: rgb(29 22 14 / 0.15);
+  --display: 'Della Respira', 'Georgia', serif;
+  --wordmark: 'Libre Caslon Text', 'Georgia', serif;
+  --sans: 'Jost Variable', 'Jost', ui-sans-serif, system-ui, sans-serif;
 
-  --serif-display: 'Libre Caslon Display', 'Libre Caslon Text', Georgia, serif;
-  --serif: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
-  --sans: 'Instrument Sans Variable', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
-
-  --gutter: clamp(16px, 4.2vw, 64px);
-  --max: 1380px;
-  --header-h: 66px;
+  --gutter: clamp(16px, 4vw, 56px);
+  --max: 1320px;
+  --header-h: 64px;
   --status-h: 0px;
   --bar-h: 0px;
   --chrome-top: calc(var(--header-h) + var(--status-h));
-  --section-y: clamp(80px, 11vw, 168px);
+  --section-y: clamp(72px, 9vw, 136px);
 
-  /* CSS twin of the pour spring, for transitions that don't go through Motion */
+  /* CSS twin of the pour spring */
   --pour: cubic-bezier(0.2, 0.9, 0.25, 1);
-  --pour-time: 900ms;
-
-  color-scheme: dark;
 }
 
 @media (max-width: 899px) {
   :root {
-    --header-h: 54px;
-    --status-h: 32px;
+    --header-h: 56px;
+    --status-h: 34px;
     --bar-h: calc(62px + env(safe-area-inset-bottom));
   }
 }
@@ -56,32 +49,27 @@
 *::after {
   box-sizing: border-box;
 }
-
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-padding-top: calc(var(--chrome-top) + 12px);
 }
-
 body {
   margin: 0;
-  background: var(--night);
-  color: var(--cream);
+  background: var(--white);
+  color: var(--black);
   font: 400 1.0625rem/1.55 var(--sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
   padding-bottom: var(--bar-h);
   overflow-x: clip;
 }
-
 img,
 picture,
 svg {
   display: block;
   max-width: 100%;
 }
-
 h1,
 h2,
 h3,
@@ -90,20 +78,19 @@ p,
 figure,
 blockquote,
 ul,
-ol {
+ol,
+dl,
+dd {
   margin: 0;
 }
-
 ul,
 ol {
   padding: 0;
   list-style: none;
 }
-
 a {
   color: inherit;
 }
-
 button,
 input,
 textarea,
@@ -111,25 +98,24 @@ select {
   font: inherit;
   color: inherit;
 }
-
 button {
   cursor: pointer;
   background: none;
   border: 0;
   padding: 0;
 }
-
 :focus-visible {
-  outline: 2px solid var(--door);
+  outline: 3px solid var(--yellow);
   outline-offset: 3px;
-  border-radius: 2px;
 }
-
+.on-yellow :focus-visible,
+.on-light :focus-visible {
+  outline-color: var(--black);
+}
 ::selection {
-  background: var(--honey);
-  color: var(--night);
+  background: var(--yellow);
+  color: var(--black);
 }
-
 .sr-only {
   position: absolute !important;
   width: 1px;
@@ -138,52 +124,19 @@ button {
   clip-path: inset(50%);
   white-space: nowrap;
 }
-
 .skip {
   position: fixed;
   left: 12px;
   top: 12px;
   z-index: 100;
   padding: 10px 14px;
-  background: var(--door);
-  color: var(--night);
+  background: var(--yellow);
+  color: var(--black);
   font-weight: 600;
   transform: translateY(-200%);
 }
 .skip:focus {
   transform: none;
-}
-
-/* ---------------------------------------------------------------- surfaces */
-
-.on-paper {
-  background: var(--paper);
-  color: var(--ink);
-  color-scheme: light;
-  --rule: var(--rule-paper);
-  --soft: var(--ink-soft);
-  --accent: var(--honey-deep);
-}
-
-.on-night {
-  background: var(--night);
-  color: var(--cream);
-  --rule: var(--rule-dark);
-  --soft: var(--cream-soft);
-  --accent: var(--honey);
-}
-
-/* Honey glass: warm, translucent, lit from above */
-.glass {
-  background:
-    linear-gradient(180deg, rgb(247 198 107 / 0.16), rgb(233 165 63 / 0.05) 60%),
-    rgb(29 22 14 / 0.62);
-  border: 1px solid rgb(247 198 107 / 0.24);
-  box-shadow:
-    inset 0 1px 0 rgb(255 228 170 / 0.18),
-    0 30px 80px -30px rgb(0 0 0 / 0.7);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
-  backdrop-filter: blur(18px) saturate(140%);
 }
 
 .wrap {
@@ -193,128 +146,145 @@ button {
   padding-inline: var(--gutter);
 }
 
+.on-dark {
+  background: var(--black);
+  color: var(--white);
+  --soft: #bdb8ad;
+  --rule: rgb(255 255 255 / 0.16);
+}
+.on-light {
+  background: var(--white);
+  color: var(--black);
+  --soft: var(--grey);
+  --rule: rgb(17 17 16 / 0.14);
+}
+.on-stone {
+  background: var(--stone);
+  color: var(--black);
+  --soft: var(--grey);
+  --rule: rgb(17 17 16 / 0.14);
+}
+.on-yellow {
+  background: var(--yellow);
+  color: var(--black);
+  --soft: #4a3c00;
+  --rule: rgb(17 17 16 / 0.2);
+}
+
 /* ---------------------------------------------------------------- type */
 
-.kicker {
-  font: 600 0.74rem/1.2 var(--sans);
-  letter-spacing: 0.16em;
+/* Their menus set headings between em dashes: "— small plates & pizzas —" */
+.dashed {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font: 400 0.95rem/1.2 var(--display);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent, var(--honey));
+}
+.dashed::before,
+.dashed::after {
+  content: '';
+  width: 1.4em;
+  height: 1px;
+  background: currentColor;
+}
+.dashed--left::before {
+  display: none;
 }
 
-.display {
-  font-family: var(--serif-display);
+.h-caps {
+  font-family: var(--display);
   font-weight: 400;
-  line-height: 0.96;
-  letter-spacing: -0.012em;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.98;
   text-wrap: balance;
 }
-
-.title {
-  font-size: clamp(2.6rem, 1.5rem + 4.4vw, 5.6rem);
+.h-xl {
+  font-size: clamp(2.6rem, 1.4rem + 5vw, 6rem);
 }
-
-.lede {
-  font: 400 clamp(1.15rem, 1rem + 0.5vw, 1.4rem) / 1.45 var(--serif);
+.h-l {
+  font-size: clamp(2.1rem, 1.3rem + 3.2vw, 4.2rem);
+}
+.h-m {
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
+}
+.lead {
+  font-size: clamp(1.1rem, 1rem + 0.45vw, 1.3rem);
+  line-height: 1.5;
+  max-width: 40ch;
   text-wrap: pretty;
-  max-width: 34ch;
 }
-
-.body {
+.soft {
   color: var(--soft);
-  max-width: 46ch;
+}
+.measure {
+  max-width: 52ch;
   text-wrap: pretty;
-}
-
-.amp {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  color: var(--honey);
-  line-height: 1;
-  text-shadow: 0 0 0.4em rgb(233 165 63 / 0.35);
-}
-.on-paper .amp {
-  color: var(--honey-deep);
-  text-shadow: none;
 }
 
 /* ---------------------------------------------------------------- buttons */
 
 .btn {
-  --h: 50px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.6em;
-  min-height: var(--h);
+  min-height: 50px;
   padding: 0 1.4em;
-  font: 600 0.98rem/1 var(--sans);
-  letter-spacing: 0.01em;
+  font: 600 0.95rem/1 var(--sans);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   text-decoration: none;
-  border-radius: 2px;
-  transition:
-    background-color 300ms var(--pour),
-    color 300ms var(--pour),
-    box-shadow 300ms var(--pour),
-    transform 600ms var(--pour);
   white-space: nowrap;
+  transition: background-color 250ms var(--pour), color 250ms var(--pour), transform 400ms var(--pour);
 }
 .btn:active {
   transform: translateY(1px);
 }
-
-/* The front door, as a button */
-.btn--door {
-  background: var(--door);
-  color: #1a130a;
-  box-shadow: inset 0 -2px 0 rgb(0 0 0 / 0.12);
+.btn--yellow {
+  background: var(--yellow);
+  color: var(--black);
 }
-.btn--door:hover {
-  background: var(--honey-hi);
-  box-shadow:
-    inset 0 -2px 0 rgb(0 0 0 / 0.12),
-    0 10px 30px -10px rgb(240 197 58 / 0.6);
+.btn--yellow:hover {
+  background: var(--yellow-sun);
 }
-
-.btn--ink {
-  background: var(--ink);
-  color: var(--paper);
+.btn--black {
+  background: var(--black);
+  color: var(--white);
 }
-.btn--ink:hover {
-  background: var(--night-3);
+.btn--black:hover {
+  background: #2c2b28;
 }
-
 .btn--line {
-  box-shadow: inset 0 0 0 1px currentColor;
+  box-shadow: inset 0 0 0 2px currentColor;
 }
 .btn--line:hover {
-  background: rgb(127 127 127 / 0.1);
+  background: rgb(127 127 127 / 0.12);
 }
-
 .btn--small {
-  --h: 40px;
+  min-height: 40px;
   padding: 0 1em;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
 }
 
-.text-link {
+.link {
   display: inline-flex;
-  align-items: center;
-  gap: 0.45em;
+  align-items: baseline;
+  gap: 0.4em;
   font: 600 0.98rem/1.3 var(--sans);
   text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.35em;
-  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
-  transition: text-decoration-color 300ms var(--pour), gap 600ms var(--pour);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+  text-decoration-color: var(--yellow);
+  transition: text-decoration-color 250ms var(--pour);
 }
-.text-link:hover {
-  text-decoration-color: var(--accent, var(--honey));
-  gap: 0.7em;
+.on-yellow .link {
+  text-decoration-color: var(--black);
 }
-.text-link .arrow {
-  color: var(--accent, var(--honey));
+.link:hover {
+  text-decoration-color: currentColor;
 }
 
 /* ---------------------------------------------------------------- photos */
@@ -325,28 +295,17 @@ button {
   overflow: hidden;
   background-size: cover;
   background-position: center;
-  background-color: var(--night-3);
+  background-color: #2a2926;
 }
 .img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 900ms var(--pour);
+  transition: opacity 700ms var(--pour);
 }
 .img img.is-loaded {
   opacity: 1;
-}
-/* Warm amber light pooling in from the edges, the way the bar is lit */
-.img--lit::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(120% 80% at 50% 110%, rgb(233 165 63 / 0.22), transparent 60%),
-    linear-gradient(180deg, rgb(255 210 140 / 0.06), transparent 40%);
-  mix-blend-mode: soft-light;
 }
 
 @media (prefers-reduced-motion: reduce) {

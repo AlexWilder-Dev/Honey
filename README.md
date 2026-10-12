@@ -1,9 +1,7 @@
 # Hive & Honey · Leicester
 
 Speculative demo site for Hive & Honey, the cocktail bar and sharing-plates restaurant at 42 Silver Street, Leicester.
-Front end only: static data, no backend.
-
-Vite, React, TypeScript, Framer Motion, HashRouter.
+Front end only: static data, no backend. Vite, React, TypeScript, Framer Motion, HashRouter.
 
 ## Run
 
@@ -15,20 +13,23 @@ npm run build     # typecheck + build into docs/ (what GitHub Pages serves)
 
 ## Demo any day and time
 
-The "Right now" status runs on London time. Add `?at=` to show another moment:
+"Right now" runs on London time. Add `?at=` to show another moment:
 
 - `?at=fri-19:30` kitchen and bar both on
-- `?at=wed-15:30` between services
+- `?at=wed-15:30` between lunch and dinner
 - `?at=sat-00:45` after midnight, so it counts as Friday night
 - `?at=mon-11:00` Monday daytime
 - `?at=sun-14:00` closed Sundays
 
 ## Where things live
 
-- `src/data/menu.ts`: the menu, transcribed from the venue's own /eat and /drink pages (source text in `intake/`, not published)
+- `src/data/menu.ts`: the menu, transcribed from the venue's own /eat and /drink pages
+- `src/data/christmas.ts`: the Christmas 2026 set menu
+- `src/data/events.ts`: what's on; dated items drop off once they've passed
 - `src/data/venue.ts`: address, contact, hours, reviews
 - `src/lib/time.ts`: opening-hours logic behind "Right now"
 - `src/lib/booking.ts`: booking slots and the pre-filled email
+- `intake/`: source text and research notes with a URL for every fact (not published)
 - `scripts/media.mjs`: resizes photos from `public/media/` into `public/img/` (`npm run media`)
 - `scripts/og.mjs`: builds `public/og.jpg`, the favicons and the footer monogram (`node scripts/og.mjs`)
 

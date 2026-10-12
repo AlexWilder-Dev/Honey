@@ -11,8 +11,8 @@
     "media": "node scripts/media.mjs"
   },
   "dependencies": {
-    "@fontsource-variable/instrument-sans": "^5.3.0",
-    "@fontsource/libre-caslon-display": "^5.3.0",
+    "@fontsource-variable/jost": "^5.3.0",
+    "@fontsource/della-respira": "^5.3.0",
     "@fontsource/libre-caslon-text": "^5.3.0",
     "framer-motion": "^14.1.0",
     "react": "^19.3.0",

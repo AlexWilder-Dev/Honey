@@ -690,3 +690,24 @@ Bar - 12:00–02:00
 Kitchen - 12:00 - 22:00
 Make a Reservation
 ```
+
+## Christmas menu 2026 (from https://www.hiveandhoneybar.co.uk/new-page images, read 2026-10-12)
+```
+Celebrate the Season with our Christmas Menu
+Three Course Festive Dining £45 per person including welcome drink
+Welcome drink: Glass of Prosecco, a bottled beer or soft drink
+Starters
+Smoked Pork Belly - Caramelised cauliflower purée, pork crackling, apple gel & jus
+Mackerel - Semi-dried tomatoes, buttermilk & dill emulsion, crispy potato
+Salt-Baked Beetroot - Whipped goat's cheese, sesame tuile & beetroot vinaigrette
+Mains
+Turkey Ballotine Wrapped in Bacon - Braised red cabbage, pigs in blankets, mustard mash & jus
+Sea Bass - Mussels, cannellini beans, rösti potato & spinach
+Porcini Mushroom Ravioli - Nasturtium emulsion & shaved Parmesan
+Desserts
+Christmas Pudding Parfait - Warm Baileys custard
+Pumpkin Panna Cotta - Chocolate & orange soil
+Selection of Cheeses & Biscuits with accompaniments
+Vegan and dietary requirements available on request.
+Book now for the perfect Christmas celebration
+```

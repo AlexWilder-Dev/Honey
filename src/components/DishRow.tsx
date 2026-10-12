@@ -3,7 +3,7 @@ import { money } from '../lib/format'
 import { AddButton } from './AddButton'
 
 /** One line of the menu: name, what's in it, price(s) and a + for each price. */
-export function DishRow({ item, size = 'small' }: { item: MenuItem; size?: 'big' | 'small' }) {
+export function DishRow({ item, size = 'small', note }: { item: MenuItem; size?: 'big' | 'small'; note?: { quote: string; by: string } }) {
   return (
     <li className={`dish dish--${size} ${item.prices.length > 1 ? 'dish--multi' : ''}`}>
       <div className="dish__text">
@@ -20,13 +20,18 @@ export function DishRow({ item, size = 'small' }: { item: MenuItem; size?: 'big'
           <p className="dish__with">
             {item.with.map((w, i) => (
               <span key={i}>
-                {i > 0 && <span className="dish__sep" aria-hidden="true"> · </span>}
+                {i > 0 && <span className="dish__sep" aria-hidden="true"> / </span>}
                 {w}
               </span>
             ))}
           </p>
         )}
         {item.note && <p className="dish__note">{item.note}</p>}
+        {note && (
+          <p className="dish__press">
+            {note.quote} <cite>{note.by}</cite>
+          </p>
+        )}
       </div>
       <div className="dish__buy">
         {item.prices.map((p, i) => (

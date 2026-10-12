@@ -20,7 +20,7 @@ export const venue = {
 export const goodToKnow = [
   { q: 'Dogs?', a: 'Welcome.' },
   { q: 'Step-free?', a: 'Level access to the main entrance, partial wheelchair access.' },
-  { q: 'Food hygiene rating?', a: '5.' },
+  { q: 'Food hygiene rating?', a: '5, inspected October 2025.' },
 ]
 
 export const reviews = [

@@ -11,20 +11,18 @@ const WIDTHS = [480, 800, 1200, 1600]
 
 // key → source photo, plus the alt text the site uses for it
 const PHOTOS = {
-  'hero-glass': ['site/R5_HIVE_003.JPG', 'Two orange spritzes clinking across the bar under low amber light'],
-  'hero-plates': ['site/WhatsApp_Image_2025-06-25_at_18.25.11_4b8bf375.jpg', 'A table covered in sharing plates, seen from above'],
+  'hero-glass': ['site/R5_HIVE_003.JPG', 'Two spritzes clinking across the bar'],
   kitchen: ['site/R5_HIVE_087.JPG', 'A pizza and a bowl of ravioli on a wooden table'],
-  bar: ['site/R5_HIVE_027.JPG', 'A spritz on a candlelit table with a guest smiling behind it'],
-  backbar: ['site/WhatsApp_Image_2025-06-09_at_14.38.52_4dbe47d2.jpg', 'The back bar glowing amber, rope lanterns hanging above the shakers'],
+  'hero-plates': ['site/WhatsApp_Image_2025-06-25_at_18.25.11_4b8bf375.jpg', 'A table covered in sharing plates, seen from above'],
+  'bar-front': ['site/WhatsApp_Image_2025-06-09_at_15.39.31_847c1076.jpg', 'The bar: a black front of lit yellow hexagons under a timber top'],
+  backbar: ['site/WhatsApp_Image_2025-06-09_at_14.38.52_4dbe47d2.jpg', 'The back bar, rope lanterns hanging above the shakers'],
   espresso: ['site/WhatsApp_Image_2025-06-25_at_18.26.19_729743f9.jpg', 'An espresso martini on the bar'],
-  pizza: ['site/WhatsApp_Image_2025-06-25_at_18.26.19_a71932ad.jpg', 'A pizza on the bar counter'],
-  plate: ['site/WhatsApp_Image_2025-06-25_at_18.25.57_44b155ff.jpg', 'A plated dish with dressed leaves on the bar'],
-  'courtyard-day': ['site/WhatsApp_Image_2025-06-25_at_18.21.23_87da8423.jpg', 'The courtyard in sunshine: green chairs, wooden tables and old brick walls'],
-  palms: ['site/WhatsApp_Image_2025-06-25_at_18.21.23_0d2d5a75.jpg', 'Palm trees in the courtyard against the sky'],
-  upstairs: ['site/WhatsApp_Image_2026-01-23_at_23.53.52_16.jpg', 'An evening dining room under old timber beams and fairy lights'],
-  'upstairs-room': ['site/R5_HIVE_071.JPG', 'Tables under the roof beams, a wall of birch branches lit from below'],
-  'courtyard-night': ['site/R5_HIVE_113.JPG', 'The courtyard at night under globe lamps'],
-  cheers: ['site/R5_HIVE_110.JPG', 'A guest laughing over a table of drinks in the courtyard at night'],
+  'courtyard-day': ['site/WhatsApp_Image_2025-06-25_at_18.21.23_87da8423.jpg', 'The courtyard in sunshine: green chairs, timber tables, old brick walls'],
+  'courtyard-night': ['site/R5_HIVE_113.JPG', 'The courtyard at night under the globe lamp'],
+  upstairs: ['site/WhatsApp_Image_2026-01-23_at_23.53.52_16.jpg', 'Dinner upstairs in the rear wing, under curved timber braces and fairy lights'],
+  'upstairs-room': ['site/R5_HIVE_071.JPG', 'Tables under the old roof timbers, a wall of birch branches lit from below'],
+  'poster-halloween': ['site/poster-halloween-2026.jpg', 'Poster: Basement Presents, Say Less, Dance More. Halloween Hive & Honey Garden Party, Friday 30th Oct, 8pm'],
+  'poster-christmas': ['site/poster-christmas-2026.jpg', 'Poster: Christmas Menu, three course festive dining, £45 per person including welcome drink'],
   door: ['extra/door.jpg', 'The yellow front door of 42 Silver Street at dusk'],
 }
 

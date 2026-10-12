@@ -26,7 +26,7 @@ export function TablePill() {
         >
           <span className="pill__label">Your table</span>
           <m.span className="pill__count" key={count.all} initial={{ y: -8, opacity: 0.4 }} animate={{ y: 0, opacity: 1 }} transition={pour}>
-            {count.plates} <small>{count.plates === 1 ? 'plate' : 'plates'}</small> <span className="amp">&amp;</span> {count.glasses}{' '}
+            {count.plates} <small>{count.plates === 1 ? 'plate' : 'plates'}</small> · {count.glasses}{' '}
             <small>{count.glasses === 1 ? 'glass' : 'glasses'}</small>
           </m.span>
           <span className="pill__total">{money(total)}</span>
@@ -89,19 +89,15 @@ export function TableSheet() {
     <Sheet open={panel === 'table'} onClose={close} label="Your table" className="sheet--tray">
       <SheetClose onClose={close} />
       <header className="sheet__top">
-        <p className="kicker">Build your table</p>
-        <h2 className="display sheet__title">Your table</h2>
+        <h2 className="h-caps sheet__title">Your table</h2>
         <p className="sheet__sub">
           {count.all
-            ? 'Plates on one side, glasses on the other. Send it with your booking and the team will know what you fancy.'
+            ? 'Plates on one side, glasses on the other. Book, and it goes in the email so the kitchen and bar know what you’re after.'
             : 'Nothing on it yet. Tap + on any plate or glass to start building.'}
         </p>
       </header>
       <div className="tray">
         <Column title="Plates" lines={plates} empty="No plates yet." />
-        <div className="tray__amp amp" aria-hidden="true">
-          &amp;
-        </div>
         <Column title="Glasses" lines={glasses} empty="No glasses yet." />
       </div>
       <footer className="sheet__foot">
@@ -111,16 +107,16 @@ export function TableSheet() {
         </p>
         {count.all > 0 ? (
           <div className="sheet__actions">
-            <button type="button" className="btn btn--door" onClick={() => openBooking()} data-autofocus>
+            <button type="button" className="btn btn--yellow" onClick={() => openBooking()} data-autofocus>
               Book this table
             </button>
-            <button type="button" className="text-link" onClick={clear}>
+            <button type="button" className="link" onClick={clear}>
               Clear the table
             </button>
           </div>
         ) : (
           <div className="sheet__actions">
-            <Link to="/menu" className="btn btn--door" onClick={close}>
+            <Link to="/menu" className="btn btn--yellow" onClick={close}>
               Open the menu
             </Link>
           </div>

@@ -11,11 +11,16 @@ const fontFile = (f) => {
 }
 const roman = fontFile('libre-caslon-text-latin-400-normal.woff')
 const italic = fontFile('libre-caslon-text-latin-400-italic.woff')
+const della = (() => {
+  const b = readFileSync('node_modules/@fontsource/della-respira/files/della-respira-latin-400-normal.woff')
+  return opentype.parse(b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength))
+})()
 
-const CREAM = '#f5ead6'
-const HONEY = '#eaa63f'
-const DOOR = '#f0c53a'
-const CHAR = '#1b1611'
+// their brand: black, white and the yellow of the awnings and front door
+const CREAM = '#ffffff'
+const HONEY = '#ffc700'
+const DOOR = '#ffc700'
+const CHAR = '#111110'
 
 const path = (font, text, x, y, size) => font.getPath(text, x, y, size).toPathData(2)
 const width = (font, text, size) => font.getAdvanceWidth(text, size)
@@ -65,30 +70,23 @@ const W = 1200, H = 630
 const photo = await sharp('public/media/site/R5_HIVE_003.JPG')
   .rotate()
   .resize({ width: 1200 })
-  .extract({ left: 0, top: 520, width: W, height: H })
+  .extract({ left: 0, top: 560, width: W, height: H })
   .modulate({ brightness: 1.02, saturation: 1.05 })
   .toBuffer()
 
-const size = 132
-const textX = 700
+const size = 118
+const panelX = 700
+const textX = 760
 const overlay = `
 <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
-  <defs>
-    <linearGradient id="fade" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0.38" stop-color="${CHAR}" stop-opacity="0"/>
-      <stop offset="0.62" stop-color="${CHAR}" stop-opacity="0.78"/>
-      <stop offset="1" stop-color="${CHAR}" stop-opacity="0.94"/>
-    </linearGradient>
-    <radialGradient id="glow" cx="0.3" cy="0.55" r="0.5">
-      <stop offset="0" stop-color="${HONEY}" stop-opacity="0.16"/>
-      <stop offset="1" stop-color="${HONEY}" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-  <rect width="${W}" height="${H}" fill="url(#glow)"/>
-  <rect width="${W}" height="${H}" fill="url(#fade)"/>
-  ${wordmark(textX, 250, size)}
-  <path d="${path(italic, 'Silver Street, Leicester', textX + 4, 470, 34)}" fill="${CREAM}" fill-opacity="0.82"/>
-  <rect x="${textX + 4}" y="500" width="64" height="2" fill="${DOOR}"/>
+  <rect x="${panelX}" y="0" width="${W - panelX}" height="${H}" fill="${CHAR}"/>
+  <rect x="${panelX}" y="0" width="${W - panelX}" height="34" fill="${HONEY}"/>
+  <rect x="${panelX}" y="34" width="${W - panelX}" height="12" fill="#e3a900"/>
+  ${wordmark(textX, 230, size)}
+  <path d="${path(della, '42 SILVER STREET', textX + 4, 452, 34)}" fill="${CREAM}"/>
+  <path d="${path(della, 'LEICESTER', textX + 4, 494, 34)}" fill="${CREAM}"/>
+  <rect x="${textX + 4}" y="530" width="72" height="4" fill="${HONEY}"/>
+  <path d="${path(della, 'COCKTAILS · SHARING PLATES · COURTYARD', textX + 4, 574, 15.5)}" fill="#bdb8ad"/>
 </svg>`
 
 await sharp(photo)

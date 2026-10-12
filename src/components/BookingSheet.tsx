@@ -1,15 +1,18 @@
 import { AnimatePresence, m } from 'framer-motion'
 import { useEffect, useId, useState, type FormEvent } from 'react'
+import { upcoming } from '../data/events'
 import { venue } from '../data/venue'
 import { bodyFor, longDate, mailtoFor, slotsFor, subjectFor, weekday, type Request, type YMD } from '../lib/booking'
 import { money, plural } from '../lib/format'
 import { pour } from '../lib/motion'
 import { useTable } from '../state/table'
-import { useUi, type Seat } from '../state/ui'
+import { useUi, type BookingPreset, type Seat } from '../state/ui'
 import { Calendar } from './Calendar'
 import { Sheet, SheetClose } from './Sheet'
 
-const OCCASIONS = ['Birthday', 'Anniversary', 'Date night', 'Celebration', 'Work do', 'Just because']
+const OCCASIONS = ['Birthday', 'Anniversary', 'Date night', 'Work do', 'Just because']
+/** Seasonal reasons to book, while they're on. */
+const occasions = () => [...upcoming().flatMap((e) => (e.occasion ? [e.occasion] : [])), ...OCCASIONS]
 const SEATS: { value: Seat; label: string }[] = [
   { value: '', label: 'Anywhere' },
   { value: 'The courtyard', label: 'The courtyard' },
@@ -19,25 +22,25 @@ const SEATS: { value: Seat; label: string }[] = [
 type Errors = Partial<Record<'date' | 'time' | 'name' | 'phone', string>>
 
 export function BookingSheet() {
-  const { panel, close, seat: presetSeat } = useUi()
+  const { panel, close, preset } = useUi()
   const open = panel === 'booking'
   return (
-    <Sheet open={open} onClose={close} label="Book a table" className="sheet--booking" tone="paper">
+    <Sheet open={open} onClose={close} label="Book a table" className="sheet--booking" tone="light">
       <SheetClose onClose={close} />
-      <BookingForm presetSeat={presetSeat} onDone={close} />
+      <BookingForm preset={preset} onDone={close} />
     </Sheet>
   )
 }
 
-function BookingForm({ presetSeat, onDone }: { presetSeat: Seat; onDone: () => void }) {
+function BookingForm({ preset, onDone }: { preset: BookingPreset; onDone: () => void }) {
   const table = useTable()
   const ids = { date: useId(), time: useId(), name: useId(), phone: useId(), notes: useId(), guests: useId() }
 
   const [date, setDate] = useState<YMD | null>(null)
   const [minutes, setMinutes] = useState<number | null>(null)
   const [guests, setGuests] = useState(2)
-  const [occasion, setOccasion] = useState('')
-  const [seat, setSeat] = useState<Seat>(presetSeat)
+  const [occasion, setOccasion] = useState(preset.occasion ?? '')
+  const [seat, setSeat] = useState<Seat>(preset.seat ?? '')
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [notes, setNotes] = useState('')
@@ -46,7 +49,10 @@ function BookingForm({ presetSeat, onDone }: { presetSeat: Seat; onDone: () => v
   const [sent, setSent] = useState<Request | null>(null)
   const [copied, setCopied] = useState(false)
 
-  useEffect(() => setSeat(presetSeat), [presetSeat])
+  useEffect(() => {
+    setSeat(preset.seat ?? '')
+    setOccasion(preset.occasion ?? '')
+  }, [preset])
 
   const slots = date ? slotsFor(date) : null
   const pickDate = (d: YMD) => {
@@ -102,23 +108,19 @@ function BookingForm({ presetSeat, onDone }: { presetSeat: Seat; onDone: () => v
   if (sent) {
     return (
       <m.div className="book book--sent" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={pour}>
-        <p className="book__big-amp amp" aria-hidden="true">
-          &amp;
-        </p>
-        <p className="kicker">Nearly there</p>
-        <h2 className="display sheet__title" tabIndex={-1} data-autofocus>
-          Over to your inbox.
+        <h2 className="h-caps sheet__title" tabIndex={-1} data-autofocus>
+          Your email’s ready
         </h2>
         <p className="book__lede">
-          Your email to the team is written and waiting. Hit send, and they'll reply to confirm your table.
+          It’s written and addressed to {venue.email}. Press send, and the team will reply to confirm your table.
         </p>
         <p className="book__ticket">
-          <span className="kicker">Subject</span>
+          <span className="book__ticket-label">Subject</span>
           {subjectFor(sent)}
         </p>
         <div className="book__fallback">
           <p>Didn't open?</p>
-          <a className="btn btn--ink" href={mailtoFor(sent)}>
+          <a className="btn btn--black" href={mailtoFor(sent)}>
             Open the email again
           </a>
           <button type="button" className="btn btn--line" onClick={copy}>
@@ -126,14 +128,14 @@ function BookingForm({ presetSeat, onDone }: { presetSeat: Seat; onDone: () => v
           </button>
           <p>
             Or{' '}
-            <a href={venue.instagram} target="_blank" rel="noreferrer" className="text-link">
+            <a href={venue.instagram} target="_blank" rel="noreferrer" className="link">
               message us on Instagram
             </a>{' '}
             or call <a href={venue.phoneHref}>{venue.phone}</a>.
           </p>
         </div>
         <p className="book__small">Live version can plug into a booking system.</p>
-        <button type="button" className="btn btn--door" onClick={onDone}>
+        <button type="button" className="btn btn--yellow" onClick={onDone}>
           Done
         </button>
       </m.div>
@@ -145,9 +147,8 @@ function BookingForm({ presetSeat, onDone }: { presetSeat: Seat; onDone: () => v
   return (
     <form className="book" onSubmit={submit} noValidate>
       <header className="sheet__top">
-        <p className="kicker">No email ping-pong</p>
-        <h2 className="display sheet__title">Book a table</h2>
-        <p className="sheet__sub">Pick a time, tell us who's coming. We'll write the email for you.</p>
+        <h2 className="h-caps sheet__title">Book a table</h2>
+        <p className="sheet__sub">Pick a day and a time and say who’s coming. We’ll write the email for you, so there’s no back and forth.</p>
       </header>
 
       <fieldset className={`field ${errors.date ? 'field--error' : ''}`}>
@@ -227,7 +228,7 @@ function BookingForm({ presetSeat, onDone }: { presetSeat: Seat; onDone: () => v
           Occasion <span className="field__hint">optional</span>
         </legend>
         <div className="chips">
-          {OCCASIONS.map((o) => (
+          {occasions().map((o) => (
             <button key={o} type="button" aria-pressed={occasion === o} className={`chip ${occasion === o ? 'is-on' : ''}`} onClick={() => setOccasion((c) => (c === o ? '' : o))}>
               {o}
             </button>
@@ -288,9 +289,6 @@ function BookingForm({ presetSeat, onDone }: { presetSeat: Seat; onDone: () => v
                 </li>
               ))}
             </ul>
-            <span className="amp" aria-hidden="true">
-              &amp;
-            </span>
             <ul>
               <li className="attached__kind">{plural(table.count.glasses, 'glass', 'glasses')}</li>
               {table.glasses.map((l) => (
@@ -307,7 +305,7 @@ function BookingForm({ presetSeat, onDone }: { presetSeat: Seat; onDone: () => v
 
       <footer className="sheet__foot book__foot">
         {date && minutes !== null && <p className="book__preview">{subjectFor({ guests, date, minutes })}</p>}
-        <button type="submit" className="btn btn--door book__submit">
+        <button type="submit" className="btn btn--yellow book__submit">
           Send booking request
         </button>
         <p className="book__small">Opens an email to {venue.email}, already filled in.</p>

@@ -3,11 +3,11 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { scrollToSection } from '../lib/nav'
 import { Drink } from '../sections/Drink'
 import { Eat } from '../sections/Eat'
-import { FindUs } from '../sections/FindUs'
-import { Hero } from '../sections/Hero'
-import { Pair } from '../sections/Pair'
-import { Reviews } from '../sections/Reviews'
-import { Spaces } from '../sections/Spaces'
+import { House } from '../sections/House'
+import { Press } from '../sections/Press'
+import { Shopfront } from '../sections/Shopfront'
+import { Visit } from '../sections/Visit'
+import { WhatsOn } from '../sections/WhatsOn'
 
 export function Home() {
   const { state, pathname } = useLocation()
@@ -25,13 +25,13 @@ export function Home() {
 
   return (
     <>
-      <Hero />
-      <Pair />
+      <Shopfront />
+      <WhatsOn />
       <Eat />
       <Drink />
-      <Spaces />
-      <Reviews />
-      <FindUs />
+      <House />
+      <Press />
+      <Visit />
     </>
   )
 }

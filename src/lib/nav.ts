@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-export type SectionId = 'eat' | 'drink' | 'spaces' | 'find'
+export type SectionId = 'on' | 'eat' | 'drink' | 'house' | 'visit'
 
 const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 

@@ -4,62 +4,56 @@ import { Img } from '../components/Img'
 import { Pour } from '../components/Pour'
 import { countItems, pick } from '../data/menu'
 
-const highlights = pick(
+const plates = pick(
+  'salted-cod-pakora',
+  'wagyu-anticucho-bite',
   'red-leicester-terrine',
   'crispy-squid',
-  'wagyu-anticucho-bite',
-  'salted-cod-pakora',
+  'mojo-verde-pork-belly',
   'scallops-causa',
   'short-rib-moussaka',
   'tzatziki-foam',
 )
 const pizzas = pick('margherita', 'aubergine', 'spicy', 'tuna')
 
+/** A dish someone in print picked out, quoted beside it. */
+const notes: Record<string, { quote: string; by: string }> = {
+  'salted-cod-pakora': { quote: '“We especially enjoyed the… salt cod pakoras”', by: 'Great Food Club' },
+}
+
 export function Eat() {
   return (
-    <section id="eat" className="course course--eat on-paper" aria-labelledby="eat-title">
+    <section id="eat" className="course course--eat on-light" aria-labelledby="eat-title">
       <div className="wrap course__grid">
-        <div className="course__media">
+        <div className="course__head">
+          <p className="dashed dashed--left">small plates &amp; pizzas</p>
+          <h2 className="h-caps h-l" id="eat-title">
+            From the Dom kitchen team
+          </h2>
+          <p className="lead">
+            The team ran Dom in Thurlaston, a Great Food Club Restaurant of the Year finalist in 2022/23. Here it’s globally inspired
+            sharing plates with Asian flavours, some unusual combinations, and a short list of pizzas.
+          </p>
+          <p className="course__how">Tap + to put a plate on your table. When you book, it goes in the email.</p>
           <Pour className="course__photo">
-            <Img k="hero-plates" lit sizes="(min-width: 900px) 40vw, 92vw" position="50% 42%" />
+            <Img k="hero-plates" sizes="(min-width: 900px) 34vw, 92vw" position="50% 40%" />
           </Pour>
-          <p className="course__caption">A few plates each, everything in the middle.</p>
         </div>
 
-        <div className="course__menu">
-          <Pour>
-            <p className="kicker">Eat</p>
-            <h2 className="display title course__title" id="eat-title">
-              Peruvian, Korean, Greek, Thai <span className="amp">&amp;</span> a little Red Leicester
-            </h2>
-            <p className="lede course__lede">The kitchen borrows from everywhere, then puts it on small plates for the middle of the table.</p>
-            <p className="course__how">
-              <span className="course__plus" aria-hidden="true">+</span> Tap to put a plate on your table. Book, and it comes with you.
-            </p>
-          </Pour>
-
+        <div className="course__list">
           <ul className="dishes dishes--big">
-            {highlights.map((it) => (
-              <DishRow key={it.id} item={it} size="big" />
+            {plates.map((it) => (
+              <DishRow key={it.id} item={it} size="big" note={notes[it.id]} />
             ))}
           </ul>
-
-          <div className="pizza">
-            <Img k="pizza" sizes="180px" className="pizza__photo" />
-            <div>
-              <h3 className="pizza__title">
-                And a short pizza list
-              </h3>
-              <ul className="dishes">
-                {pizzas.map((it) => (
-                  <DishRow key={it.id} item={it} />
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <Link to="/menu/plates" className="text-link course__more">
-            All {countItems('plate')} plates, pizzas and puddings <span className="arrow">→</span>
+          <h3 className="dashed dashed--left course__sub">pizza</h3>
+          <ul className="dishes">
+            {pizzas.map((it) => (
+              <DishRow key={it.id} item={it} />
+            ))}
+          </ul>
+          <Link to="/menu/plates" className="link course__more">
+            All {countItems('plate')} plates, pizzas and desserts →
           </Link>
         </div>
       </div>

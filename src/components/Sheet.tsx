@@ -9,13 +9,13 @@ type Props = {
   label: string
   children: ReactNode
   className?: string
-  tone?: 'night' | 'paper'
+  tone?: 'dark' | 'light'
 }
 
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), textarea, select, [tabindex]:not([tabindex="-1"])'
 
 /** A dialog that pours in from the side (or from below on phones). */
-export function Sheet({ open, onClose, label, children, className = '', tone = 'night' }: Props) {
+export function Sheet({ open, onClose, label, children, className = '', tone = 'dark' }: Props) {
   const narrow = useMedia(NARROW)
   const panel = useRef<HTMLDivElement>(null)
 
@@ -81,7 +81,7 @@ export function Sheet({ open, onClose, label, children, className = '', tone = '
             aria-modal="true"
             aria-label={label}
             tabIndex={-1}
-            className={`sheet ${tone === 'paper' ? 'on-paper' : 'on-night'} ${className}`}
+            className={`sheet ${tone === 'light' ? 'on-light' : 'on-dark'} ${className}`}
             initial={from}
             animate={to}
             exit={{ ...from, transition: { duration: 0.28, ease: [0.4, 0, 1, 1] } }}
