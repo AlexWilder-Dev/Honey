@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { DishRow } from '../components/DishRow'
 import { Img } from '../components/Img'
-import { Pour } from '../components/Pour'
 import { menu, pick } from '../data/menu'
 import { money } from '../lib/format'
 
@@ -19,28 +18,24 @@ const mocktailPrices = [...new Set(mocktails.map((m) => m.prices[0].amount))]
 
 export function Drink() {
   return (
-    <section id="drink" className="course course--drink on-dark" aria-labelledby="drink-title">
+    <section id="drink" className="course course--drink section on-dark" aria-labelledby="drink-title">
       <div className="wrap course__grid">
         <div className="course__head">
-          <p className="dashed dashed--left">the hive list</p>
-          <h2 className="h-caps h-l" id="drink-title">
-            From The Gadabout bar team
+          <span className="eyebrow">Drink</span>
+          <h2 className="title" id="drink-title">
+            The Hive List
           </h2>
           <p className="lead">
-            The Gadabout has been mixing on Guildhall Lane since 2018, named for “a habitual pleasure-seeker”. The list here runs from
-            rhubarb milk punch to a martini finished with pickled onion brine.
+            From the bar team at The Gadabout, mixing on Guildhall Lane since 2018. Rhubarb milk punch, a fat-washed bourbon sour, and a
+            martini finished with pickled onion brine.
           </p>
-          <blockquote className="course__quote">
+          <blockquote className="quote">
             <p>“Cocktails are a highlight too, with an imaginative list that reflects the venue’s sense of fun and flair.”</p>
             <cite>Great Food Club</cite>
           </blockquote>
           <div className="course__photos">
-            <Pour className="course__photo">
-              <Img k="bar-front" sizes="(min-width: 900px) 26vw, 60vw" position="50% 60%" />
-            </Pour>
-            <Pour className="course__photo course__photo--small" delay={0.15}>
-              <Img k="espresso" sizes="(min-width: 900px) 14vw, 36vw" />
-            </Pour>
+            <Img k="bar-front" sizes="(min-width: 900px) 26vw, 60vw" position="50% 60%" />
+            <Img k="espresso" sizes="(min-width: 900px) 14vw, 36vw" />
           </div>
         </div>
 

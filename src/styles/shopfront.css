@@ -1,545 +1,697 @@
 /* ================================================================
- * The front of 42 Silver Street, built in CSS.
- * Proportions follow the real elevation: a narrow window bay on the left,
- * the stone doorcase and yellow door, the lit menu case, a wide bay right.
+ * The front of 42 Silver Street, drawn flat.
+ *
+ * Rules: flat colour, crisp edges, one shadow style, no textures or
+ * gradients except light (the wall lamp, the lit case, lit windows).
+ * Every element sits on a frontage measured in % of its frame, and all
+ * type and line weights are in cqw, so the drawing scales as one piece.
  * ================================================================ */
 
 .sf {
-  --win-h: clamp(200px, 25vw, 360px);
-  --render-tex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .13 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --brick-tex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='40'%3E%3Crect width='120' height='40' fill='%23cdbfae'/%3E%3Crect x='0' y='0' width='58' height='18' fill='%23b0532f'/%3E%3Crect x='60' y='0' width='58' height='18' fill='%23a14a29'/%3E%3Crect x='0' y='20' width='28' height='18' fill='%23b85d36'/%3E%3Crect x='30' y='20' width='58' height='18' fill='%23a9502d'/%3E%3Crect x='90' y='20' width='30' height='18' fill='%23b85d36'/%3E%3C/svg%3E");
+  --brick: #a84f2c;
+  --brick-line: rgb(0 0 0 / 0.14);
+  --render: #141414;
+  --frame: #f5f3ee;
+  --stone-w: #eeebe4;
+  --stone-shade: #d9d4c9;
+  --yellow-face: #ffc700;
+  --yellow-valance: #e9b100;
+  --yellow-line: #d29c00;
+  --line: max(1.5px, 0.12cqw);
+  --shadow: 0 0.6cqw 1.2cqw rgb(0 0 0 / 0.35);
   position: relative;
-  background: var(--render);
   color: var(--white);
   overflow: hidden;
 }
 
-/* ---------------------------------------------------------------- upstairs: brick and sashes */
-
-.sf__brick {
+/* a frame is the measured frontage; walls run edge to edge behind it */
+.sf__frame {
   position: relative;
-  height: clamp(72px, 9vw, 132px);
-  background: var(--brick-tex) 0 0 / 84px 28px, var(--brick);
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  padding: 0 14%;
-  box-shadow: inset 0 -14px 18px -10px rgb(0 0 0 / 0.35);
+  container-type: inline-size;
+  width: min(100%, 1480px);
+  margin-inline: auto;
 }
-.sf__brick::after {
-  /* the string course where brick meets render */
-  content: '';
+.sf__frame > * {
   position: absolute;
-  inset: auto 0 0;
-  height: 7px;
-  background: #e9e3d6;
-  box-shadow: 0 2px 0 rgb(0 0 0 / 0.35);
+}
+
+/* ---------------------------------------------------------------- upstairs */
+
+.sf__upper {
+  background:
+    repeating-linear-gradient(180deg, transparent 0 13px, var(--brick-line) 13px 14px),
+    var(--brick);
+  border-bottom: 7px solid var(--frame);
+}
+.sf__frame--upper {
+  aspect-ratio: 1000 / 112;
 }
 .sash {
-  position: relative;
-  width: clamp(54px, 7vw, 104px);
-  height: 92%;
-  margin-bottom: 12px;
-  border: 5px solid #f4f2ec;
-  border-bottom-width: 7px;
+  bottom: 9%;
+  width: 5.6%;
+  height: 78%;
   background:
-    linear-gradient(to right, transparent calc(33.3% - 1.5px), #f4f2ec 0 calc(33.3% + 1.5px), transparent 0 calc(66.6% - 1.5px), #f4f2ec 0 calc(66.6% + 1.5px), transparent 0),
-    linear-gradient(to bottom, transparent calc(50% - 3px), #f4f2ec 0 calc(50% + 3px), transparent 0),
-    linear-gradient(to bottom, transparent calc(25% - 1.5px), #f4f2ec 0 calc(25% + 1.5px), transparent 0 calc(75% - 1.5px), #f4f2ec 0 calc(75% + 1.5px), transparent 0),
-    linear-gradient(160deg, #3a4651 0%, #1d2329 55%, #2c353d 100%);
-}
-.sash:nth-child(2) {
-  /* someone's left a light on upstairs */
-  background:
-    linear-gradient(to right, transparent calc(33.3% - 1.5px), #f4f2ec 0 calc(33.3% + 1.5px), transparent 0 calc(66.6% - 1.5px), #f4f2ec 0 calc(66.6% + 1.5px), transparent 0),
-    linear-gradient(to bottom, transparent calc(50% - 3px), #f4f2ec 0 calc(50% + 3px), transparent 0),
-    linear-gradient(to bottom, transparent calc(25% - 1.5px), #f4f2ec 0 calc(25% + 1.5px), transparent 0 calc(75% - 1.5px), #f4f2ec 0 calc(75% + 1.5px), transparent 0),
-    radial-gradient(120% 90% at 50% 80%, #ffd36b 0%, #d98c25 55%, #6b3d12 100%);
+    linear-gradient(var(--frame), var(--frame)) 0 50% / 100% 7% no-repeat,
+    linear-gradient(var(--frame), var(--frame)) 33.3% 0 / 0.25cqw 100% no-repeat,
+    linear-gradient(var(--frame), var(--frame)) 66.6% 0 / 0.25cqw 100% no-repeat,
+    linear-gradient(var(--frame), var(--frame)) 0 25% / 100% 0.25cqw no-repeat,
+    linear-gradient(var(--frame), var(--frame)) 0 75% / 100% 0.25cqw no-repeat,
+    #26313b;
+  box-shadow: 0 0 0 0.45cqw var(--frame);
 }
 .sash::before {
-  /* rubbed brick arch */
-  content: '';
-  position: absolute;
-  left: -12px;
-  right: -12px;
-  top: -20px;
-  height: 14px;
-  background: #8d3c1f;
-  clip-path: polygon(0 0, 100% 0, 92% 100%, 8% 100%);
-}
-.sash::after {
   /* stone sill */
   content: '';
   position: absolute;
-  left: -10px;
-  right: -10px;
-  bottom: -14px;
-  height: 7px;
-  background: #e9e3d6;
+  left: -1.1cqw;
+  right: -1.1cqw;
+  bottom: -0.95cqw;
+  height: 0.5cqw;
+  background: var(--frame);
+}
+.sash--lit {
+  background-color: #f1b44a;
+}
+.sash--1 {
+  left: 19%;
+}
+.sash--2 {
+  left: 47.2%;
+}
+.sash--3 {
+  left: 75.4%;
 }
 
 /* ---------------------------------------------------------------- ground floor */
 
 .sf__ground {
-  position: relative;
-  display: grid;
-  grid-template-columns: 23fr 14fr 13fr 38fr;
-  column-gap: 2.4%;
-  align-items: end;
-  padding: clamp(28px, 3vw, 44px) 5% 0 calc(5% + clamp(110px, 11vw, 160px));
-  background:
-    linear-gradient(180deg, rgb(0 0 0 / 0.35), transparent 22%),
-    var(--render-tex),
-    var(--render);
+  background: var(--render);
+}
+.sf__frame--ground {
+  aspect-ratio: 1000 / 430;
 }
 
-/* projecting sign on its iron bracket, like the real one */
+/* projecting sign on its iron arm */
 .sign {
-  position: absolute;
-  top: clamp(6px, 1vw, 14px);
-  left: 0;
-  width: clamp(120px, 12vw, 176px);
-  transform-origin: 60% 0;
-  z-index: 3;
+  left: 2.6%;
+  top: 4%;
+  width: 14.4%;
+  z-index: 2;
 }
-.sign__bracket {
+.sign__arm {
   display: block;
-  height: 14px;
-  border-top: 3px solid #0b0b0b;
-  border-right: 3px solid #0b0b0b;
-  border-top-right-radius: 10px;
-  width: 92%;
+  height: 1.4cqw;
+  margin-left: 6%;
+  border-top: var(--line) solid #000;
+  border-right: var(--line) solid #000;
+  border-top-right-radius: 1cqw;
+  width: 70%;
 }
 .sign__board {
   display: grid;
   place-items: center;
-  margin: 0 8% 0 14%;
-  aspect-ratio: 1.15;
-  background: #f7f5ef;
+  aspect-ratio: 1;
+  background: var(--frame);
   color: #141414;
-  box-shadow: 0 10px 20px rgb(0 0 0 / 0.45), inset 0 0 0 3px #fff, inset 0 0 0 4px #d8d3c8;
-  font-size: clamp(1.15rem, 1.6vw, 1.7rem);
+  box-shadow: var(--shadow), inset 0 0 0 0.5cqw var(--frame), inset 0 0 0 calc(0.5cqw + var(--line)) #141414;
+  font-size: 2.55cqw;
+}
+.sign__board .wordmark {
+  --wm-bg: var(--frame);
+  --amp: #c08a00;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .sign {
+    transform-origin: 60% 0;
+  }
+  .sign:hover {
+    animation: sway 1.4s cubic-bezier(0.3, 0, 0.3, 1);
+  }
+}
+@keyframes sway {
+  20% {
+    transform: rotate(-4deg);
+  }
+  45% {
+    transform: rotate(2.5deg);
+  }
+  70% {
+    transform: rotate(-1deg);
+  }
 }
 
-.bay {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-/* fixed canvas awning: sloped face in sun, valance in shade */
+/* awnings: flat canvas, a face and a valance with the lettering */
 .awning {
-  position: relative;
-  margin: 0 -5%;
+  top: 14%;
+  height: 11.6%;
   z-index: 2;
-  filter: drop-shadow(0 14px 10px rgb(0 0 0 / 0.45));
+  filter: drop-shadow(0 0.8cqw 0.6cqw rgb(0 0 0 / 0.45));
 }
-.awning__top {
+.awning--left {
+  left: 19.2%;
+  width: 21.6%;
+}
+.awning--right {
+  left: 70.4%;
+  width: 27.6%;
+}
+.awning__face {
   display: block;
-  height: clamp(30px, 3.6vw, 54px);
-  background: linear-gradient(180deg, #ffdf63 0%, var(--yellow) 85%);
-  clip-path: polygon(3.5% 0, 96.5% 0, 100% 100%, 0 100%);
+  height: 68%;
+  background: var(--yellow-face);
+  clip-path: polygon(3% 0, 97% 0, 100% 100%, 0 100%);
 }
 .awning__valance {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: clamp(20px, 2.2vw, 30px);
-  background: var(--yellow-shade);
-  color: #241b00;
-  font: 400 clamp(0.62rem, 0.9vw, 0.86rem) / 1 var(--display);
-  letter-spacing: 0.28em;
+  display: grid;
+  place-items: center;
+  height: 32%;
+  background: var(--yellow-valance);
+  color: #2a1f00;
+  font: 500 max(9px, 0.98cqw) / 1 var(--sans);
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   white-space: nowrap;
   overflow: hidden;
 }
 
+/* shop windows: white frame, the room behind, thin Georgian bars */
 .window {
-  position: relative;
-  margin: 0 2%;
-  height: var(--win-h);
-  background: #0d0d0d;
-  box-shadow: 0 0 0 clamp(5px, 0.7vw, 10px) #f4f2ec;
-  margin-top: clamp(12px, 1.4vw, 20px);
+  top: 29%;
+  height: 59%;
+  overflow: hidden;
+  background: #0c0c0c;
+  box-shadow: 0 0 0 0.7cqw var(--frame);
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+.window--left {
+  left: 21%;
+  width: 18%;
+}
+.window--right {
+  left: 72%;
+  width: 24.4%;
 }
 .window .img {
   position: absolute;
   inset: 0;
 }
-.window .img::after {
-  /* glass: a cool sheen across the top, warmth from inside */
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(115deg, rgb(255 255 255 / 0.16) 0%, rgb(255 255 255 / 0.04) 28%, transparent 40%, transparent 70%, rgb(255 255 255 / 0.06) 85%);
-}
 .window__bars {
   position: absolute;
   inset: 0;
-  display: grid;
-  grid-template-columns: repeat(var(--lights), 1fr);
-  gap: clamp(6px, 0.8vw, 12px);
-  background: transparent;
-}
-.window__bars span {
-  /* glazing bars, kept thin so you can see in */
-  box-shadow: 0 0 0 clamp(3px, 0.4vw, 6px) #f4f2ec;
+  z-index: 2;
+  pointer-events: none;
+  --bar: 0.22cqw;
   background:
-    linear-gradient(to right, transparent calc(33.3% - 1px), #f4f2ec 0 calc(33.3% + 1px), transparent 0 calc(66.6% - 1px), #f4f2ec 0 calc(66.6% + 1px), transparent 0),
-    linear-gradient(to bottom, transparent calc(33.3% - 1px), #f4f2ec 0 calc(33.3% + 1px), transparent 0 calc(66.6% - 1px), #f4f2ec 0 calc(66.6% + 1px), transparent 0);
+    linear-gradient(var(--frame), var(--frame)) 50% 0 / 0.5cqw 100% no-repeat,
+    linear-gradient(90deg, transparent calc(25% - var(--bar) / 2), var(--frame) 0 calc(25% + var(--bar) / 2), transparent 0 calc(75% - var(--bar) / 2), var(--frame) 0 calc(75% + var(--bar) / 2), transparent 0),
+    linear-gradient(transparent calc(33.3% - var(--bar) / 2), var(--frame) 0 calc(33.3% + var(--bar) / 2), transparent 0 calc(66.6% - var(--bar) / 2), var(--frame) 0 calc(66.6% + var(--bar) / 2), transparent 0);
+  box-shadow: inset 0 0 3cqw rgb(0 0 0 / 0.35);
+}
+.window--right .window__bars {
+  background:
+    linear-gradient(var(--frame), var(--frame)) 33.3% 0 / 0.5cqw 100% no-repeat,
+    linear-gradient(var(--frame), var(--frame)) 66.6% 0 / 0.5cqw 100% no-repeat,
+    linear-gradient(transparent calc(33.3% - var(--bar) / 2), var(--frame) 0 calc(33.3% + var(--bar) / 2), transparent 0 calc(66.6% - var(--bar) / 2), var(--frame) 0 calc(66.6% + var(--bar) / 2), transparent 0);
 }
 
-/* black slatted planter of ornamental grass under each window */
+/* planters of fountain grass along the sill */
 .planter {
-  position: relative;
-  display: block;
-  height: clamp(28px, 3.6vw, 52px);
-  margin: -14px 6% 0;
-  z-index: 2;
-  background: repeating-linear-gradient(180deg, #0c0c0c 0 9px, #262624 9px 11px);
-  box-shadow: 0 6px 10px rgb(0 0 0 / 0.5);
+  top: 82%;
+  height: 11%;
+  z-index: 3;
+  background: #0a0a0a;
+  box-shadow: inset 0 var(--line) 0 #2c2c2c;
+}
+.planter--left {
+  left: 21.6%;
+  width: 16.8%;
+}
+.planter--right {
+  left: 72.8%;
+  width: 22.8%;
 }
 .planter svg {
   position: absolute;
   left: 2%;
-  right: 2%;
-  bottom: 96%;
+  bottom: 100%;
   width: 96%;
-  height: 120%;
-  fill: none;
-  stroke: #cdb877;
-  stroke-width: 1.1;
-  stroke-linecap: round;
-  opacity: 0.75;
+  height: 4.6cqw;
+  fill: #c9b26b;
 }
 
-/* ---------------------------------------------------------------- the doorcase */
-
-.portico {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  z-index: 2;
+/* the doorcase: stone, Doric, with a triglyph frieze */
+.doorcase {
+  left: 43%;
+  top: 19%;
+  width: 14%;
+  height: 76%;
 }
-.portico__cornice {
-  display: block;
-  height: clamp(10px, 1.2vw, 16px);
-  margin: 0 -7%;
-  background: #f6f4ee;
-  box-shadow: 0 6px 0 -2px #d9d4c8, 0 10px 14px rgb(0 0 0 / 0.4);
+.doorcase > span,
+.doorcase > button {
+  position: absolute;
 }
-.portico__frieze {
-  /* triglyphs over the door */
-  display: block;
-  height: clamp(22px, 2.6vw, 38px);
-  margin: 4px -3% 0;
+.doorcase__cornice {
+  left: -6%;
+  right: -6%;
+  top: 0;
+  height: 4%;
+  background: var(--stone-w);
+  box-shadow: 0 var(--line) 0 var(--stone-shade), var(--shadow);
+}
+.doorcase__frieze {
+  left: 0;
+  right: 0;
+  top: 4.6%;
+  height: 7%;
   background:
-    repeating-linear-gradient(90deg, #f6f4ee 0 7%, #d6d0c2 7% 8%, #f6f4ee 8% 9.5%, #d6d0c2 9.5% 10.5%, #f6f4ee 10.5% 14%),
-    #f6f4ee;
-  border-bottom: 4px solid #e3ded3;
+    repeating-linear-gradient(90deg, transparent 0 9%, var(--stone-shade) 9% 10%, transparent 10% 11.5%, var(--stone-shade) 11.5% 12.5%, transparent 12.5% 16.66%),
+    var(--stone-w);
+  border-bottom: var(--line) solid var(--stone-shade);
 }
-.portico__body {
-  display: grid;
-  grid-template-columns: 17% 1fr 17%;
-  align-items: stretch;
-  height: calc(var(--win-h) + clamp(44px, 5vw, 76px));
+.doorcase__col {
+  top: 11.6%;
+  bottom: 2.5%;
+  width: 15%;
+  background:
+    linear-gradient(90deg, transparent 28%, var(--stone-shade) 28% calc(28% + var(--line)), transparent 0 70%, var(--stone-shade) 70% calc(70% + var(--line)), transparent 0),
+    var(--stone-w);
 }
-.column {
-  position: relative;
-  background: linear-gradient(90deg, #d7d2c6 0%, #fbfaf6 35%, #ffffff 50%, #e8e4da 80%, #c9c3b6 100%);
-}
-.column::before,
-.column::after {
-  /* capital and base */
+.doorcase__col::before,
+.doorcase__col::after {
   content: '';
   position: absolute;
-  left: -14%;
-  right: -14%;
-  height: 7%;
-  background: #f4f2ec;
-  box-shadow: 0 2px 0 #d6d0c2;
+  left: -12%;
+  right: -12%;
+  height: 4%;
+  background: var(--stone-w);
+  box-shadow: 0 var(--line) 0 var(--stone-shade);
 }
-.column::before {
+.doorcase__col::before {
   top: 0;
 }
-.column::after {
+.doorcase__col::after {
   bottom: 0;
-  height: 9%;
 }
-.portico__step {
-  display: block;
-  height: 10px;
-  margin: 0 -10%;
-  background: #cfc9bc;
-  box-shadow: 0 4px 0 #a8a297;
+.doorcase__col--l {
+  left: 0;
+}
+.doorcase__col--r {
+  right: 0;
+}
+.doorcase__step {
+  left: -8%;
+  right: -8%;
+  bottom: 0;
+  height: 2.5%;
+  background: var(--stone-shade);
 }
 
-/* the yellow door: a real button, and it opens a little when you reach for it */
+/* the yellow door, a real button; it opens a crack when you reach for it */
 .door {
-  position: relative;
-  display: grid;
-  grid-template-rows: 20% 1fr;
-  margin: 0 6%;
-  perspective: 700px;
-  background: #3b2a0a;
-  color: #141414;
+  left: 18%;
+  right: 18%;
+  top: 11.6%;
+  bottom: 2.5%;
+  perspective: 60cqw;
   cursor: pointer;
 }
-.door__light {
+.door__inside {
   position: absolute;
-  inset: 20% 0 0;
-  background: radial-gradient(90% 60% at 50% 60%, #ffe39a 0%, #f2a93a 45%, #6b3a08 100%);
+  inset: 22% 0 0;
+  background: radial-gradient(80% 60% at 50% 70%, #ffd77a, #c97d1c 70%, #6b3a08);
 }
-.door__transom {
-  position: relative;
-  grid-row: 1;
-  background: var(--yellow);
-  border-bottom: 3px solid #cf9900;
-  box-shadow: inset 0 0 0 6px var(--yellow), inset 0 0 0 8px #d9a300;
+.door__fan {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 20%;
+  background:
+    repeating-conic-gradient(from -90deg at 50% 100%, var(--yellow-face) 0 14deg, var(--yellow-line) 14deg 15deg),
+    var(--yellow-face);
+  border-bottom: calc(var(--line) * 2) solid var(--yellow-line);
 }
 .door__leaf {
   position: absolute;
-  top: 20%;
+  top: 22%;
   bottom: 0;
   width: 50%;
-  background: var(--yellow);
-  box-shadow:
-    inset 0 0 0 7px var(--yellow),
-    inset 0 0 0 9px #d9a300,
-    inset 0 -40px 0 -32px #d9a300;
-  transition: transform 1100ms var(--pour);
+  background: var(--yellow-face);
+  transition: transform 900ms var(--pour);
+}
+.door__leaf::before,
+.door__leaf::after {
+  /* raised panels */
+  content: '';
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  border: var(--line) solid var(--yellow-line);
 }
 .door__leaf::before {
-  /* two raised panels per leaf */
-  content: '';
-  position: absolute;
-  inset: 12% 18% 52%;
-  box-shadow: inset 0 0 0 2px #d9a300, inset 0 0 0 4px #ffd84f;
+  top: 8%;
+  height: 34%;
 }
 .door__leaf::after {
-  content: '';
-  position: absolute;
-  inset: 54% 18% 10%;
-  box-shadow: inset 0 0 0 2px #d9a300, inset 0 0 0 4px #ffd84f;
+  top: 52%;
+  height: 38%;
 }
 .door__leaf--l {
   left: 0;
-  border-right: 1px solid #c99400;
+  border-right: var(--line) solid var(--yellow-line);
   transform-origin: 0 50%;
 }
 .door__leaf--r {
   right: 0;
   transform-origin: 100% 50%;
 }
-.door:hover .door__leaf--r,
-.door:focus-visible .door__leaf--r {
-  transform: rotateY(38deg);
+@media (hover: hover) {
+  .door:hover .door__leaf--r {
+    transform: rotateY(40deg);
+  }
+  .door:hover .door__leaf--l {
+    transform: rotateY(-8deg);
+  }
 }
-.door:hover .door__leaf--l,
-.door:focus-visible .door__leaf--l {
-  transform: rotateY(-10deg);
+.door:focus-visible .door__leaf--r {
+  transform: rotateY(40deg);
 }
 .door__plate {
   position: absolute;
   left: 50%;
-  top: 44%;
-  transform: translateX(-50%);
+  top: 47%;
   z-index: 2;
-  padding: 0.55em 0.7em;
+  transform: translateX(-50%);
+  padding: 0.6cqw 0.8cqw;
   background: #111;
   color: var(--yellow);
-  font: 600 clamp(0.58rem, 0.82vw, 0.82rem) / 1.1 var(--sans);
-  letter-spacing: 0.14em;
+  font: 600 max(9px, 0.82cqw) / 1 var(--sans);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   white-space: nowrap;
-  box-shadow: 0 4px 10px rgb(0 0 0 / 0.4);
+  box-shadow: var(--shadow);
 }
 .door:focus-visible {
-  outline-offset: 6px;
+  outline-offset: 0.8cqw;
 }
 
-/* ---------------------------------------------------------------- the lit menu case */
-
-.case {
-  position: relative;
-  align-self: center;
-  margin-top: clamp(40px, 6vw, 90px);
+/* wall lamp and the lit case beside the door */
+.lamp {
+  left: 62.4%;
+  top: 22%;
+  width: 1.6%;
+  height: 2.6%;
+  background: #050505;
 }
-.case__lamp {
-  position: absolute;
-  left: 50%;
-  top: -54px;
-  width: 22px;
-  height: 14px;
-  transform: translateX(-50%);
-  background: #0a0a0a;
-  border-radius: 3px;
-}
-.case__lamp::before {
-  /* up-and-down wash of the wall light */
+.lamp::before {
   content: '';
   position: absolute;
   left: 50%;
-  top: -46px;
-  width: 90px;
-  height: 106px;
-  transform: translateX(-50%);
+  top: 50%;
+  width: 9cqw;
+  height: 12cqw;
+  transform: translate(-50%, -50%);
   background:
-    radial-gradient(40% 50% at 50% 0%, rgb(255 205 110 / 0.5), transparent 70%),
-    radial-gradient(40% 50% at 50% 100%, rgb(255 205 110 / 0.45), transparent 70%);
-  filter: blur(2px);
+    radial-gradient(35% 40% at 50% 8%, rgb(255 210 120 / 0.45), transparent 75%),
+    radial-gradient(35% 40% at 50% 92%, rgb(255 210 120 / 0.35), transparent 75%);
   pointer-events: none;
 }
-.case__glass {
-  position: relative;
-  display: grid;
-  gap: 10px;
-  padding: clamp(12px, 1.2vw, 18px);
-  background: linear-gradient(180deg, #fff3c2 0%, #ffe07a 100%);
-  color: #161208;
-  border: clamp(5px, 0.6vw, 8px) solid #0b0b0b;
-  box-shadow:
-    0 0 0 1px #2b2b2b,
-    0 0 40px rgb(255 214 110 / 0.35),
-    inset 0 0 0 1px rgb(0 0 0 / 0.1);
+.case {
+  left: 59.4%;
+  top: 33%;
+  width: 7.6%;
+  height: 34%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6cqw;
+  padding: 1cqw 0.9cqw;
+  background: #fff6d2;
+  color: #141414;
+  text-decoration: none;
+  box-shadow: 0 0 0 0.45cqw #050505, 0 0 3.2cqw rgb(255 214 110 / 0.28);
+  transition: background 200ms ease;
 }
-.case__label {
-  font: 400 0.72rem/1 var(--display);
-  letter-spacing: 0.2em;
+.case:hover {
+  background: #fffbe6;
+}
+.case__state {
+  font: 400 max(13px, 1.7cqw) / 1 var(--display);
   text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
-.case .now {
-  font: 600 clamp(0.82rem, 0.95vw, 0.98rem) / 1.3 var(--sans);
+.case__state::before {
+  content: '';
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.35em;
+  border-radius: 50%;
+  vertical-align: 0.1em;
+  background: #2fa84f;
 }
-.case__hours {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 2px 8px;
-  padding-top: 8px;
-  border-top: 1px solid rgb(0 0 0 / 0.2);
-  font-size: 0.74rem;
-  line-height: 1.35;
+.case--closed .case__state::before {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px currentColor;
 }
-.case__hours dt {
-  font-weight: 600;
+.case__line {
+  font: 500 max(10px, 0.84cqw) / 1.35 var(--sans);
+  text-wrap: balance;
 }
 .case__menu {
-  font: 600 0.78rem/1.2 var(--sans);
+  margin-top: auto;
+  font: 600 max(10px, 0.8cqw) / 1 var(--sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: 0.3em;
 }
 
-/* ---------------------------------------------------------------- pavement and A-board */
-
-.sf__pavement {
-  position: relative;
-  height: clamp(54px, 6vw, 86px);
-  background:
-    linear-gradient(90deg, transparent 0 calc(100% - 2px), rgb(0 0 0 / 0.14) 0) 0 0 / 140px 100%,
-    linear-gradient(180deg, transparent 0 calc(55% - 1px), rgb(0 0 0 / 0.12) 0 55%, transparent 0) ,
-    linear-gradient(180deg, #d5d0c5, #c4beb2);
-  box-shadow: inset 0 10px 14px -8px rgb(0 0 0 / 0.5);
-}
-.sf__pavement::after {
-  /* kerb */
-  content: '';
-  position: absolute;
-  inset: auto 0 0;
-  height: 9px;
-  background: #9d978b;
-}
-
+/* the A-board out on the pavement, showing the next night out */
 .aboard {
-  position: absolute;
-  left: 47%;
-  bottom: 14px;
+  left: 63.4%;
+  top: 72%;
+  width: 7.4%;
+  height: 33%;
   z-index: 4;
-  width: clamp(104px, 9.5vw, 140px);
-  aspect-ratio: 0.78;
-  padding: 9px;
-  background: #121212;
-  clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%);
-  transition: transform 600ms var(--pour);
-}
-.aboard:hover {
-  transform: translateY(-4px);
-}
-.aboard__poster {
-  display: grid;
-  align-content: center;
-  justify-items: center;
-  gap: 6px;
-  height: 100%;
-  padding: 8px 6px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5cqw;
+  padding: 0.8cqw 0.7cqw;
   background: var(--yellow);
   color: #111;
+  text-align: center;
+  border: 0.45cqw solid #111;
+  clip-path: polygon(7% 0, 93% 0, 100% 100%, 0 100%);
+  transition: transform 500ms var(--pour);
+}
+.aboard:hover {
+  transform: translateY(-0.3cqw);
 }
 .aboard__when {
-  font: 700 0.62rem/1 var(--sans);
-  letter-spacing: 0.16em;
+  font: 700 max(8px, 0.62cqw) / 1.2 var(--sans);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 .aboard__what {
-  font: 400 clamp(0.86rem, 1.15vw, 1.15rem) / 1.05 var(--display);
+  font: 400 max(11px, 1.08cqw) / 1.05 var(--display);
   text-transform: uppercase;
 }
-.aboard__time {
-  font: 500 0.62rem/1.2 var(--sans);
+
+/* ---------------------------------------------------------------- pavement */
+
+.sf__pavement {
+  height: clamp(28px, 3.4vw, 52px);
+  background:
+    repeating-linear-gradient(90deg, transparent 0 139px, rgb(0 0 0 / 0.1) 139px 140px),
+    #d3cec3;
+  border-bottom: 8px solid #a59f93;
 }
 
-.sf__case-m {
-  display: none;
+/* ---------------------------------------------------------------- the pomsky in the window */
+
+.pomsky {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.pomsky__dog {
+  position: absolute;
+  left: 12%;
+  bottom: 10%; /* sits just behind the planter */
+  width: 34%;
+  display: block;
+}
+.pomsky__dog svg {
+  width: 100%;
+  height: auto;
+}
+.pomsky__eye,
+.pomsky__ear {
+  transform-box: fill-box;
+}
+.pomsky__eye {
+  transform-origin: 50% 50%;
+}
+.pomsky__ear--l {
+  transform-origin: 60% 100%;
+}
+.pomsky__ear--r {
+  transform-origin: 40% 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .is-up .pomsky__eye {
+    animation: blink 2.6s 0.9s infinite;
+  }
+  .is-up .pomsky__ear--r {
+    animation: twitch 0.5s 0.5s 2;
+  }
+}
+@keyframes blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+@keyframes twitch {
+  50% {
+    transform: rotate(12deg);
+  }
+}
+.pomsky__woof {
+  position: absolute;
+  z-index: 3;
+  left: 44%;
+  bottom: 52%;
+  padding: 0.5em 0.8em;
+  border-radius: 1em 1em 1em 0.2em;
+  background: var(--white);
+  color: var(--black);
+  font: 600 max(11px, 0.9cqw) / 1 var(--sans);
+  white-space: nowrap;
+  transform-origin: 0 100%;
 }
 
-/* ---------------------------------------------------------------- phones */
+/* ---------------------------------------------------------------- phones: the left bay and the door */
 
 @media (max-width: 899px) {
-  .sf__brick {
-    padding: 0 10%;
+  .sf__frame--upper {
+    aspect-ratio: 100 / 24;
   }
-  .sash:nth-child(3) {
+  .sash {
+    width: 15%;
+    box-shadow: 0 0 0 1.2cqw var(--frame);
+    background:
+      linear-gradient(var(--frame), var(--frame)) 0 50% / 100% 7% no-repeat,
+      linear-gradient(var(--frame), var(--frame)) 33.3% 0 / 0.7cqw 100% no-repeat,
+      linear-gradient(var(--frame), var(--frame)) 66.6% 0 / 0.7cqw 100% no-repeat,
+      linear-gradient(var(--frame), var(--frame)) 0 25% / 100% 0.7cqw no-repeat,
+      linear-gradient(var(--frame), var(--frame)) 0 75% / 100% 0.7cqw no-repeat,
+      #26313b;
+  }
+  .sash--lit {
+    background-color: #f1b44a;
+  }
+  .sash::before {
+    left: -3cqw;
+    right: -3cqw;
+    bottom: -2.6cqw;
+    height: 1.4cqw;
+  }
+  .sash--1 {
+    left: 21%;
+  }
+  .sash--2 {
+    left: 68%;
+  }
+  .sash--3 {
     display: none;
+  }
+  .sf__upper {
+    background:
+      repeating-linear-gradient(180deg, transparent 0 9px, var(--brick-line) 9px 10px),
+      var(--brick);
+    border-bottom-width: 5px;
+  }
+  .sf__frame--ground {
+    aspect-ratio: 100 / 104;
   }
   .sf {
-    --win-h: clamp(190px, 52vw, 260px);
-  }
-  .sf__ground {
-    grid-template-columns: 1.25fr 1fr;
-    column-gap: 7%;
-    padding: 104px 6% 0;
-  }
-  .bay--right,
-  .case {
-    display: none;
-  }
-  .portico__body {
-    height: calc(var(--win-h) + 56px);
+    --line: max(1.5px, 0.35cqw);
+    --shadow: 0 1.4cqw 2.8cqw rgb(0 0 0 / 0.35);
   }
   .sign {
-    width: 112px;
+    left: 5%;
+    top: 3%;
+    width: 30%;
   }
+  .sign__arm {
+    height: 3.4cqw;
+    border-top-right-radius: 2.4cqw;
+  }
+  .sign__board {
+    font-size: 6.2cqw;
+    box-shadow: var(--shadow), inset 0 0 0 1.2cqw var(--frame), inset 0 0 0 calc(1.2cqw + var(--line)) #141414;
+  }
+  .awning {
+    filter: drop-shadow(0 2cqw 1.4cqw rgb(0 0 0 / 0.45));
+  }
+  .awning--left {
+    left: 4%;
+    width: 49%;
+    top: 38%;
+    height: 10%;
+  }
+  .awning__valance {
+    font-size: 2.6cqw;
+  }
+  .window--left {
+    left: 7.5%;
+    width: 42%;
+    top: 51%;
+    height: 40%;
+    box-shadow: 0 0 0 1.6cqw var(--frame);
+  }
+  .window__bars {
+    --bar: 0.6cqw;
+    background:
+      linear-gradient(var(--frame), var(--frame)) 50% 0 / 1.2cqw 100% no-repeat,
+      linear-gradient(90deg, transparent calc(25% - var(--bar) / 2), var(--frame) 0 calc(25% + var(--bar) / 2), transparent 0 calc(75% - var(--bar) / 2), var(--frame) 0 calc(75% + var(--bar) / 2), transparent 0),
+      linear-gradient(transparent calc(33.3% - var(--bar) / 2), var(--frame) 0 calc(33.3% + var(--bar) / 2), transparent 0 calc(66.6% - var(--bar) / 2), var(--frame) 0 calc(66.6% + var(--bar) / 2), transparent 0);
+  }
+  .planter--left {
+    left: 9%;
+    width: 39%;
+    top: 86%;
+    height: 9%;
+  }
+  .planter svg {
+    height: 9cqw;
+  }
+  .doorcase {
+    left: 60%;
+    width: 33%;
+    top: 26%;
+    height: 71%;
+  }
+  .door__plate {
+    font-size: 2.5cqw;
+    padding: 1.6cqw 2cqw;
+  }
+  .awning--right,
+  .window--right,
+  .planter--right,
+  .lamp,
+  .case,
   .aboard {
     display: none;
   }
-  .sf__case-m {
-    display: block;
-    padding: 18px var(--gutter) 22px;
-    background: var(--render-tex), var(--render);
-  }
-  .sf__case-m .case__glass {
-    grid-template-columns: 1fr auto;
-    align-items: start;
-  }
-  .sf__case-m .case__label,
-  .sf__case-m .now {
-    grid-column: 1 / -1;
-  }
-  .sf__case-m .case__hours {
-    font-size: 0.82rem;
-  }
-  .sf__case-m .case__menu {
-    align-self: end;
+  .pomsky__woof {
+    font-size: 3cqw;
   }
 }

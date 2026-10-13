@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { DishRow } from '../components/DishRow'
 import { Img } from '../components/Img'
-import { Pour } from '../components/Pour'
 import { countItems, pick } from '../data/menu'
 
 const plates = pick(
@@ -23,21 +22,21 @@ const notes: Record<string, { quote: string; by: string }> = {
 
 export function Eat() {
   return (
-    <section id="eat" className="course course--eat on-light" aria-labelledby="eat-title">
+    <section id="eat" className="course course--eat section on-stone" aria-labelledby="eat-title">
       <div className="wrap course__grid">
         <div className="course__head">
-          <p className="dashed dashed--left">small plates &amp; pizzas</p>
-          <h2 className="h-caps h-l" id="eat-title">
-            From the Dom kitchen team
+          <span className="eyebrow">Eat</span>
+          <h2 className="title" id="eat-title">
+            Small plates &amp; pizzas
           </h2>
           <p className="lead">
-            The team ran Dom in Thurlaston, a Great Food Club Restaurant of the Year finalist in 2022/23. Here it’s globally inspired
-            sharing plates with Asian flavours, some unusual combinations, and a short list of pizzas.
+            From the team behind Dom in Thurlaston, a Great Food Club Restaurant of the Year finalist in 2022/23. Globally inspired plates
+            with Asian flavours running through, built for sharing.
           </p>
-          <p className="course__how">Tap + to put a plate on your table. When you book, it goes in the email.</p>
-          <Pour className="course__photo">
-            <Img k="hero-plates" sizes="(min-width: 900px) 34vw, 92vw" position="50% 40%" />
-          </Pour>
+          <p className="course__how">
+            <span className="course__plus" aria-hidden="true">+</span> Tap to put a plate on your table. When you book, it goes in the email.
+          </p>
+          <Img k="hero-plates" sizes="(min-width: 900px) 34vw, 92vw" position="50% 40%" className="course__photo" />
         </div>
 
         <div className="course__list">
@@ -46,7 +45,7 @@ export function Eat() {
               <DishRow key={it.id} item={it} size="big" note={notes[it.id]} />
             ))}
           </ul>
-          <h3 className="dashed dashed--left course__sub">pizza</h3>
+          <h3 className="dashed course__sub">Pizza</h3>
           <ul className="dishes">
             {pizzas.map((it) => (
               <DishRow key={it.id} item={it} />

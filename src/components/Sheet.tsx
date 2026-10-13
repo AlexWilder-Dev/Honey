@@ -1,6 +1,6 @@
 import { AnimatePresence, m } from 'framer-motion'
 import { useEffect, useRef, type ReactNode } from 'react'
-import { pour } from '../lib/motion'
+import { snap } from '../lib/motion'
 import { NARROW, useMedia } from '../lib/useMedia'
 
 type Props = {
@@ -60,7 +60,7 @@ export function Sheet({ open, onClose, label, children, className = '', tone = '
     }
   }, [open, onClose])
 
-  const from = narrow ? { y: 80, opacity: 0 } : { x: 60, opacity: 0 }
+  const from = narrow ? { y: 48, opacity: 0 } : { x: 40, opacity: 0 }
   const to = narrow ? { y: 0, opacity: 1 } : { x: 0, opacity: 1 }
 
   return (
@@ -73,7 +73,7 @@ export function Sheet({ open, onClose, label, children, className = '', tone = '
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
+            transition={{ duration: 0.2 }}
           />
           <m.div
             ref={panel}
@@ -84,8 +84,8 @@ export function Sheet({ open, onClose, label, children, className = '', tone = '
             className={`sheet ${tone === 'light' ? 'on-light' : 'on-dark'} ${className}`}
             initial={from}
             animate={to}
-            exit={{ ...from, transition: { duration: 0.28, ease: [0.4, 0, 1, 1] } }}
-            transition={pour}
+            exit={{ ...from, transition: { duration: 0.18, ease: [0.4, 0, 1, 1] } }}
+            transition={snap}
           >
             {children}
           </m.div>

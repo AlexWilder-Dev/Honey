@@ -1,7 +1,7 @@
 import { AnimatePresence, m } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { money, plural } from '../lib/format'
-import { pour } from '../lib/motion'
+import { snap } from '../lib/motion'
 import { useTable, type TableLine } from '../state/table'
 import { useUi } from '../state/ui'
 import { Sheet, SheetClose } from './Sheet'
@@ -18,14 +18,14 @@ export function TablePill() {
           type="button"
           className="pill"
           onClick={openTable}
-          initial={{ opacity: 0, y: -24 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 16, transition: { duration: 0.2 } }}
-          transition={pour}
+          exit={{ opacity: 0, y: 16, transition: { duration: 0.15 } }}
+          transition={snap}
           aria-label={`Your table: ${plural(count.plates, 'plate')} and ${plural(count.glasses, 'glass', 'glasses')}, ${money(total)}. Open`}
         >
           <span className="pill__label">Your table</span>
-          <m.span className="pill__count" key={count.all} initial={{ y: -8, opacity: 0.4 }} animate={{ y: 0, opacity: 1 }} transition={pour}>
+          <m.span className="pill__count" key={count.all} initial={{ y: -6, opacity: 0.4 }} animate={{ y: 0, opacity: 1 }} transition={snap}>
             {count.plates} <small>{count.plates === 1 ? 'plate' : 'plates'}</small> · {count.glasses}{' '}
             <small>{count.glasses === 1 ? 'glass' : 'glasses'}</small>
           </m.span>
@@ -54,10 +54,10 @@ function Column({ title, lines, empty }: { title: string; lines: TableLine[]; em
               <m.li
                 key={l.key}
                 className="tray__line"
-                initial={{ opacity: 0, y: -12 }}
+                initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, transition: { duration: 0.2 } }}
-                transition={pour}
+                exit={{ opacity: 0, transition: { duration: 0.15 } }}
+                transition={snap}
               >
                 <span className="tray__name">
                   {l.name}
@@ -89,7 +89,7 @@ export function TableSheet() {
     <Sheet open={panel === 'table'} onClose={close} label="Your table" className="sheet--tray">
       <SheetClose onClose={close} />
       <header className="sheet__top">
-        <h2 className="h-caps sheet__title">Your table</h2>
+        <h2 className="title sheet__title">Your table</h2>
         <p className="sheet__sub">
           {count.all
             ? 'Plates on one side, glasses on the other. Book, and it goes in the email so the kitchen and bar know what you’re after.'

@@ -1,24 +1,24 @@
-import { m } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Img, type ImageKey } from '../components/Img'
-import { RightNow } from '../components/RightNow'
+import { Pomsky, PomskyWoof } from '../components/Pomsky'
 import { Wordmark } from '../components/Wordmark'
 import { nextEvent } from '../data/events'
-import { pour } from '../lib/motion'
-import { hoursSummary, serviceMoment } from '../lib/time'
+import { useGoto } from '../lib/nav'
 import { useVenueClock } from '../state/clock'
 import { useUi } from '../state/ui'
-import { useGoto } from '../lib/nav'
 
 /**
- * The front of 42 Silver Street as the way in: black render, yellow awnings,
- * Georgian glazing bars with the bar and kitchen behind them, the yellow door
- * in its stone doorcase, and the lit menu case beside it.
+ * The front of 42 Silver Street as the way in, drawn flat like an architect's
+ * elevation: red brick and sashes upstairs, black render below, yellow awnings
+ * over two shop windows (the bar and the kitchen behind the glass), the yellow
+ * door in its stone doorcase, and the lit case by the door with what's
+ * happening right now. Everything is placed in proportion to the frontage, so
+ * it holds together at any width.
  */
 export function Shopfront() {
   const { openBooking } = useUi()
-  const { moment } = useVenueClock()
-  const today = hoursSummary(serviceMoment(moment).day)
+  const { status } = useVenueClock()
   const event = nextEvent()
   const goto = useGoto()
 
@@ -28,123 +28,118 @@ export function Shopfront() {
         Hive &amp; Honey: cocktail bar and sharing plates at 42 Silver Street, Leicester
       </h1>
 
-      <div className="sf__brick" aria-hidden="true">
-        <span className="sash" />
-        <span className="sash" />
-        <span className="sash" />
+      <div className="sf__upper" aria-hidden="true">
+        <div className="sf__frame sf__frame--upper">
+          <span className="sash sash--1" />
+          <span className="sash sash--2 sash--lit" />
+          <span className="sash sash--3" />
+        </div>
       </div>
 
       <div className="sf__ground">
-        <m.div
-          className="sign"
-          aria-hidden="true"
-          initial={{ rotate: -7 }}
-          animate={{ rotate: 0 }}
-          transition={{ ...pour, delay: 0.4 }}
-        >
-          <span className="sign__bracket" />
-          <span className="sign__board">
-            <Wordmark />
-          </span>
-        </m.div>
+        <div className="sf__frame sf__frame--ground">
+          <div className="sign" aria-hidden="true">
+            <span className="sign__arm" />
+            <span className="sign__board">
+              <Wordmark />
+            </span>
+          </div>
 
-        <Bay side="left" label="Cocktails" photo="hero-glass" position="34% 48%" lights={2} />
+          <Bay side="left" label="Cocktail bar" photo="hero-glass" position="36% 46%" egg />
 
-        <div className="portico">
-          <span className="portico__cornice" aria-hidden="true" />
-          <span className="portico__frieze" aria-hidden="true" />
-          <div className="portico__body">
-            <span className="column" aria-hidden="true" />
+          <div className="doorcase">
+            <span className="doorcase__cornice" />
+            <span className="doorcase__frieze" />
+            <span className="doorcase__col doorcase__col--l" />
+            <span className="doorcase__col doorcase__col--r" />
             <button type="button" className="door" onClick={() => openBooking()}>
-              <span className="door__light" aria-hidden="true" />
-              <span className="door__transom" aria-hidden="true" />
+              <span className="door__inside" aria-hidden="true" />
+              <span className="door__fan" aria-hidden="true" />
               <span className="door__leaf door__leaf--l" aria-hidden="true" />
               <span className="door__leaf door__leaf--r" aria-hidden="true" />
               <span className="door__plate">Book a table</span>
             </button>
-            <span className="column" aria-hidden="true" />
+            <span className="doorcase__step" />
           </div>
-          <span className="portico__step" aria-hidden="true" />
+
+          <span className="lamp" aria-hidden="true" />
+          <Link to="/menu" className={`case case--${status.barOpen ? 'open' : 'closed'}`}>
+            <span className="case__state">{status.barOpen ? 'Open' : 'Closed'}</span>
+            <span className="case__line">{status.line}</span>
+            <span className="case__menu">Menu →</span>
+          </Link>
+
+          <Bay side="right" label="Sharing plates" photo="kitchen" position="58% 56%" />
+
+          {event && (
+            <button type="button" className="aboard" onClick={() => goto('on')}>
+              <span className="aboard__when">{event.when}</span>
+              <span className="aboard__what">{event.title}</span>
+              <span className="sr-only">: see what's on</span>
+            </button>
+          )}
         </div>
-
-        <div className="case">
-          <span className="case__lamp" aria-hidden="true" />
-          <CaseGlass bar={today.bar} kitchen={today.kitchen} />
-        </div>
-
-        <Bay side="right" label="Sharing plates" photo="kitchen" position="60% 55%" lights={4} />
       </div>
 
-      <div className="sf__pavement">
-        <button type="button" className="aboard" onClick={() => goto('on')}>
-          <span className="aboard__poster">
-            {event ? (
-              <>
-                <span className="aboard__when">{event.when}</span>
-                <span className="aboard__what">{event.title}</span>
-                <span className="aboard__time">{event.time}</span>
-              </>
-            ) : (
-              <span className="aboard__what">Walk-ins welcome</span>
-            )}
-          </span>
-          <span className="sr-only">What's on</span>
-        </button>
-      </div>
-
-      <div className="sf__case-m">
-        <CaseGlass bar={today.bar} kitchen={today.kitchen} />
-      </div>
+      <div className="sf__pavement" aria-hidden="true" />
     </section>
   )
 }
 
-/** The lit case by the door, where the menu and today's hours live. */
-function CaseGlass({ bar, kitchen }: { bar: string; kitchen: string }) {
+/** Five taps on the glass inside a second wakes whoever's in the window. */
+function useKnock(times = 5, within = 1000, stay = 5000) {
+  const taps = useRef<number[]>([])
+  const [up, setUp] = useState(false)
+  useEffect(() => {
+    if (!up) return
+    const t = window.setTimeout(() => setUp(false), stay)
+    return () => window.clearTimeout(t)
+  }, [up, stay])
+  const knock = () => {
+    const now = performance.now()
+    taps.current = [...taps.current.filter((t) => now - t < within), now]
+    if (taps.current.length >= times) {
+      taps.current = []
+      setUp(true)
+    }
+  }
+  return { up, knock }
+}
+
+function Bay({ side, label, photo, position, egg }: { side: 'left' | 'right'; label: string; photo: ImageKey; position: string; egg?: boolean }) {
+  const { up, knock } = useKnock()
   return (
-    <div className="case__glass">
-      <p className="case__label">Right now</p>
-      <RightNow />
-      <dl className="case__hours">
-        <dt>Bar</dt>
-        <dd>{bar}</dd>
-        <dt>Kitchen</dt>
-        <dd>{kitchen}</dd>
-      </dl>
-      <Link to="/menu" className="case__menu">
-        Read the menu →
-      </Link>
-    </div>
+    <>
+      <div className={`awning awning--${side}`} aria-hidden="true">
+        <span className="awning__face" />
+        <span className="awning__valance">{label}</span>
+      </div>
+      <div className={`window window--${side}`} onPointerDown={egg ? knock : undefined}>
+        <Img k={photo} priority sizes={side === 'left' ? '(min-width: 900px) 20vw, 46vw' : '28vw'} position={position} />
+        {egg && <Pomsky up={up} />}
+        <span className="window__bars" aria-hidden="true" />
+        {egg && <PomskyWoof up={up} />}
+      </div>
+      <span className={`planter planter--${side}`} aria-hidden="true">
+        <svg viewBox="0 0 200 40" preserveAspectRatio="none">
+          <path d={GRASS} />
+        </svg>
+      </span>
+    </>
   )
 }
 
-function Bay({ side, label, photo, position, lights }: { side: 'left' | 'right'; label: string; photo: ImageKey; position: string; lights: number }) {
-  return (
-    <div className={`bay bay--${side}`}>
-      <div className="awning" aria-hidden="true">
-        <span className="awning__top" />
-        <span className="awning__valance">{label}</span>
-      </div>
-      <div className="window" style={{ ['--lights' as string]: lights }}>
-        <Img k={photo} priority sizes={side === 'left' ? '(min-width: 900px) 26vw, 52vw' : '40vw'} position={position} />
-        <span className="window__bars" aria-hidden="true">
-          {Array.from({ length: lights }, (_, i) => (
-            <span key={i} />
-          ))}
-        </span>
-      </div>
-      <span className="planter" aria-hidden="true">
-        <svg viewBox="0 0 200 60" preserveAspectRatio="none">
-          {Array.from({ length: 90 }, (_, i) => {
-            // ornamental grass: soft arching blades, denser in the middle of each clump
-            const clump = Math.floor(i / 15)
-            const x = 14 + clump * 34 + ((i * 7) % 15) - 7
-            const h = 18 + ((i * 37) % 26)
-            const lean = (((i * 13) % 23) - 11) * 1.4
-            return <path key={i} d={`M${x} 60 Q ${x + lean * 0.2} ${60 - h * 0.7} ${x + lean} ${60 - h}`} />
-          })}
-        </svg>
-      </span>
-    </div>
-  )
-}
+/* Fountain grass, as one flat silhouette: a row of tufts, each a fan of blades. */
+const GRASS = [16, 50, 84, 118, 152, 186]
+  .map((x, t) => {
+    const h = 30 + ((t * 7) % 9)
+    const blades = [-1, -0.55, -0.2, 0.15, 0.5, 0.95]
+    return blades
+      .map((b) => {
+        const tipX = x + b * 22
+        const tipY = 40 - h * (1 - Math.abs(b) * 0.28)
+        return `M${x - 2} 40 Q ${x + b * 6} ${40 - h * 0.6} ${tipX.toFixed(1)} ${tipY.toFixed(1)} Q ${x + b * 3} ${40 - h * 0.5} ${x + 2} 40 Z`
+      })
+      .join(' ')
+  })
+  .join(' ')

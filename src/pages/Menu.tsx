@@ -1,9 +1,8 @@
-import { AnimatePresence, m } from 'framer-motion'
+import { m } from 'framer-motion'
 import { useEffect, useRef, type KeyboardEvent } from 'react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { DishRow } from '../components/DishRow'
 import { menu, menuTagline } from '../data/menu'
-import { pour } from '../lib/motion'
 
 export function Menu() {
   const { tab = 'plates' } = useParams()
@@ -22,7 +21,16 @@ export function Menu() {
 
   const go = (id: string, focus = false) => {
     navigate(`/menu/${id}`, { replace: true })
-    if (focus) requestAnimationFrame(() => tabs.current?.querySelector<HTMLButtonElement>(`#tab-${id}`)?.focus())
+    requestAnimationFrame(() => {
+      // If you're further down than the start of the list, bring the new list's top up under the tabs.
+      const panel = document.getElementById('menu-panel')
+      const bar = document.querySelector('.tabs-bar')
+      if (panel && bar) {
+        const target = panel.getBoundingClientRect().top + window.scrollY - bar.getBoundingClientRect().bottom - 8
+        if (window.scrollY > target) window.scrollTo({ top: target })
+      }
+      if (focus) tabs.current?.querySelector<HTMLButtonElement>(`#tab-${id}`)?.focus()
+    })
   }
 
   const onKey = (e: KeyboardEvent) => {
@@ -54,8 +62,8 @@ export function Menu() {
   return (
     <main className="menu on-light" id="main">
       <header className="wrap menu__head">
-        <p className="dashed dashed--left">the menu</p>
-        <h1 className="h-caps h-xl">Plates, pizzas &amp; the Hive List</h1>
+        <span className="eyebrow">The menu</span>
+        <h1 className="title title--xl">Small plates, pizzas &amp; the Hive List</h1>
         <p className="lead">“{menuTagline}.”</p>
         <p className="menu__how">
           Tap + on anything to put it on your table, then book it in one go. V is vegetarian. Allergies or dietary needs? Have a word with
@@ -77,17 +85,15 @@ export function Menu() {
       </div>
 
       <div className="wrap">
-        <AnimatePresence mode="wait" initial={false}>
-          <m.div
+        <m.div
             key={current.id}
             id="menu-panel"
             role="tabpanel"
             aria-labelledby={`tab-${current.id}`}
             className={`menu__panel menu__panel--${current.sections.length > 1 ? 'many' : 'one'}`}
-            initial={{ opacity: 0, y: -18 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, transition: { duration: 0.15 } }}
-            transition={pour}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.16, ease: 'easeOut' }}
           >
             {current.sections.map((s) => (
               <section key={s.id} className="menu__section" aria-labelledby={`sec-${s.id}`}>
@@ -102,7 +108,6 @@ export function Menu() {
               </section>
             ))}
           </m.div>
-        </AnimatePresence>
       </div>
     </main>
   )

@@ -108,7 +108,7 @@ function BookingForm({ preset, onDone }: { preset: BookingPreset; onDone: () => 
   if (sent) {
     return (
       <m.div className="book book--sent" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={pour}>
-        <h2 className="h-caps sheet__title" tabIndex={-1} data-autofocus>
+        <h2 className="title sheet__title" tabIndex={-1} data-autofocus>
           Your email’s ready
         </h2>
         <p className="book__lede">
@@ -147,7 +147,7 @@ function BookingForm({ preset, onDone }: { preset: BookingPreset; onDone: () => 
   return (
     <form className="book" onSubmit={submit} noValidate>
       <header className="sheet__top">
-        <h2 className="h-caps sheet__title">Book a table</h2>
+        <h2 className="title sheet__title">Book a table</h2>
         <p className="sheet__sub">Pick a day and a time and say who’s coming. We’ll write the email for you, so there’s no back and forth.</p>
       </header>
 

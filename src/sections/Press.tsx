@@ -1,15 +1,14 @@
-import { Pour } from '../components/Pour'
 import { reviews, venue } from '../data/venue'
 
 /* Great Food Club quotes from https://www.greatfoodclub.co.uk/business/hive-and-honey-leicester/ */
 export function Press() {
   return (
-    <section className="press on-light" aria-labelledby="press-title">
+    <section className="press section on-light" aria-labelledby="press-title">
       <div className="wrap press__grid">
-        <Pour className="press__lead">
-          <h2 className="sr-only" id="press-title">
+        <div>
+          <span className="eyebrow" id="press-title">
             What people say
-          </h2>
+          </span>
           <blockquote className="press__big">
             <p>“A buzzy, cosmopolitan vibe – helped by a spacious courtyard and elegant branding.”</p>
             <cite>
@@ -18,17 +17,22 @@ export function Press() {
               </a>
             </cite>
           </blockquote>
-        </Pour>
+        </div>
         <div className="press__google">
           <p className="press__score">
-            <strong>{venue.google.rating}</strong> on Google, from {venue.google.count} reviews
+            <span className="press__num">{venue.google.rating}</span>
+            <span>
+              on Google
+              <br />
+              from {venue.google.count} reviews
+            </span>
           </p>
           <ul>
-            {reviews.map((r, i) => (
-              <Pour as="li" key={r.quote} delay={i * 0.08}>
+            {reviews.map((r) => (
+              <li key={r.quote}>
                 <p>“{r.quote}”</p>
                 <cite>{r.source}</cite>
-              </Pour>
+              </li>
             ))}
           </ul>
         </div>

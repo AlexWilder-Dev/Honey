@@ -20,18 +20,16 @@ export function Visit() {
   ]
 
   return (
-    <section id="visit" className="visit on-dark" aria-labelledby="visit-title">
+    <section id="visit" className="visit section on-dark" aria-labelledby="visit-title">
       <div className="wrap visit__grid">
         <div className="visit__where">
-          <p className="dashed dashed--left">visit</p>
-          <h2 className="h-caps h-xl" id="visit-title">
+          <span className="eyebrow">Visit</span>
+          <h2 className="title title--xl" id="visit-title">
             {venue.street}
           </h2>
           <p className="lead">
-            {venue.city} {venue.postcode}, in the Old Town, right next to St Martin’s Square.
-          </p>
-          <p className="visit__walkin">
-            “Walk-ins are greeted with open wings,” as they put it. Or book ahead.
+            {venue.city} {venue.postcode}, in the Old Town, right next to St Martin’s Square. Walk-ins are “greeted with open wings”, or book
+            ahead.
           </p>
           <div className="visit__actions">
             <button type="button" className="btn btn--yellow" onClick={() => openBooking()}>
@@ -56,7 +54,7 @@ export function Visit() {
 
         <div className="visit__when">
           <div className="visit__now">
-            <RightNow />
+            <RightNow showDemo={false} />
           </div>
           <table className="hours">
             <caption className="sr-only">Opening hours</caption>

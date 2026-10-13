@@ -322,7 +322,7 @@
   margin-bottom: 26px;
 }
 .sheet__title {
-  font-size: clamp(2rem, 1.6rem + 1.8vw, 2.8rem);
+  font-size: clamp(2rem, 1.6rem + 1.6vw, 2.6rem);
   margin: 4px 0 12px;
 }
 .sheet__sub {
@@ -363,8 +363,8 @@
   gap: 8px;
   padding-bottom: 10px;
   border-bottom: 2px solid var(--yellow);
-  font: 400 0.95rem/1.2 var(--display);
-  letter-spacing: 0.1em;
+  font: 600 0.72rem/1.2 var(--sans);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 .tray__empty {
@@ -440,7 +440,6 @@
 .mnav__link {
   text-align: left;
   font: 400 clamp(1.8rem, 1.3rem + 3vw, 2.4rem) / 1.2 var(--display);
-  text-transform: uppercase;
   text-decoration: none;
   padding-block: 6px;
 }
@@ -668,8 +667,8 @@
   gap: 10px;
   margin-bottom: 12px;
   padding: 0;
-  font: 400 0.95rem/1.2 var(--display);
-  letter-spacing: 0.08em;
+  font: 600 0.72rem/1.2 var(--sans);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 .field__hint {
@@ -969,9 +968,7 @@
   width: 70px;
 }
 .footer__strap {
-  font: 400 1.1rem/1 var(--display);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font: 400 1.3rem/1 var(--display);
   color: var(--white);
 }
 .footer__line {

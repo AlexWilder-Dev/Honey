@@ -38,6 +38,14 @@
 .tabs::-webkit-scrollbar {
   display: none;
 }
+@media (max-width: 899px) {
+  /* a soft edge says there's more to swipe to */
+  .tabs {
+    -webkit-mask-image: linear-gradient(90deg, #000 82%, transparent);
+    mask-image: linear-gradient(90deg, #000 82%, transparent);
+    padding-right: 40px;
+  }
+}
 .tabs__group {
   display: flex;
   gap: 4px;
@@ -123,7 +131,7 @@
   gap: 18px;
   justify-items: start;
 }
-.xmas__head .h-xl {
+.xmas__head .title {
   color: var(--yellow);
 }
 .xmas__small {
