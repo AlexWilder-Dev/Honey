@@ -19,6 +19,8 @@ export type VenueEvent = {
   blurb: string
   poster?: ImageKey
   occasion?: string
+  /** a few words for the cover */
+  short: string
 }
 
 export const events: VenueEvent[] = [
@@ -28,6 +30,7 @@ export const events: VenueEvent[] = [
     to: '2026-11-01',
     kicker: 'Leicester Restaurant Week',
     title: '3 dishes for £25',
+    short: 'Restaurant Week, three dishes for £25',
     when: '19 Oct – 1 Nov',
     time: 'Lunch and dinner',
     blurb: 'Three plates for £25 at lunch or dinner, plus the exclusive Leicester Restaurant Week cocktail.',
@@ -39,6 +42,7 @@ export const events: VenueEvent[] = [
     to: '2026-10-30',
     kicker: 'The Basement presents',
     title: 'Halloween Garden Party',
+    short: 'a Halloween party in the courtyard',
     when: 'Fri 30 Oct',
     time: '8pm till 1am',
     blurb: 'The last-Friday DJ set goes out to the courtyard for Halloween. Say less, dance more.',
@@ -50,6 +54,7 @@ export const events: VenueEvent[] = [
     to: '2026-12-31',
     kicker: 'Christmas menu',
     title: 'Three courses, £45',
+    short: 'Christmas at £45 a head',
     when: 'Booking now',
     time: 'Welcome drink included',
     blurb: 'Smoked pork belly, turkey ballotine wrapped in bacon, Christmas pudding parfait with warm Baileys custard. Vegan and dietary needs on request.',

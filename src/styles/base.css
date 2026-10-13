@@ -1,28 +1,28 @@
 /*
- * Colours are taken off the building and their brand: the black render of the
- * ground floor, the yellow of the awnings and front door (their brand yellow),
- * the white portico and glazing bars, the stone pavement of Silver Street, the
- * red brick upstairs and the lime-green courtyard chairs.
+ * Editorial theme: paper and ink, like their printed menus, with the yellow of
+ * the awnings and front door kept for small, deliberate marks.
+ * Type: Libre Caslon for the masthead (their wordmark), Newsreader for
+ * headlines and reading, Schibsted Grotesk for labels and folios.
  */
 :root {
-  --black: #111110;
-  --render: #1a1a19;
+  --paper: #f4f0e7;
+  --paper-2: #ebe5d8;
+  --paper-3: #e0d8c7;
+  --ink: #151413;
+  --ink-2: #3b3833;
+  --ink-soft: #6b665c;
+  --night: #151413;
   --yellow: #ffc700;
-  --yellow-sun: #ffd640;
-  --yellow-shade: #e3a900;
-  --white: #ffffff;
-  --stone: #f4f1ea;
-  --stone-2: #e7e2d7;
-  --stone-dark: #b9b3a6;
-  --brick: #b0532f;
-  --lime: #b5c72f;
-  --lime-dark: #5c6b00;
-  --grey: #5d5a54;
-  --grey-light: #a19c92;
+  --yellow-deep: #a87a00;
+  --lime: #a9b839;
 
-  --display: 'Della Respira', 'Georgia', serif;
-  --wordmark: 'Libre Caslon Text', 'Georgia', serif;
-  --sans: 'Jost Variable', 'Jost', ui-sans-serif, system-ui, sans-serif;
+  --rule: rgb(21 20 19 / 0.16);
+  --rule-strong: var(--ink);
+
+  --mast: 'Libre Caslon Display', 'Libre Caslon Text', Georgia, serif;
+  --wordmark: 'Libre Caslon Text', Georgia, serif;
+  --serif: 'Newsreader Variable', 'Newsreader', Georgia, 'Times New Roman', serif;
+  --sans: 'Schibsted Grotesk Variable', 'Schibsted Grotesk', ui-sans-serif, system-ui, sans-serif;
 
   --gutter: clamp(16px, 4vw, 56px);
   --max: 1320px;
@@ -30,12 +30,11 @@
   --status-h: 0px;
   --bar-h: 0px;
   --chrome-top: calc(var(--header-h) + var(--status-h));
-  --section-y: clamp(80px, 9vw, 140px);
-
-  /* CSS twin of the pour spring */
+  --section-y: clamp(72px, 9vw, 136px);
   --pour: cubic-bezier(0.2, 0.9, 0.25, 1);
-}
 
+  color-scheme: light;
+}
 @media (max-width: 899px) {
   :root {
     --header-h: 56px;
@@ -50,7 +49,6 @@
   box-sizing: border-box;
 }
 html {
-  /* keep the scrollbar's space when a sheet locks scrolling, so nothing shifts sideways */
   scrollbar-gutter: stable;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -58,11 +56,13 @@ html {
 }
 body {
   margin: 0;
-  background: var(--white);
-  color: var(--black);
-  font: 400 1.0625rem/1.55 var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.0625rem/1.6 var(--serif);
+  font-variation-settings: 'opsz' 16;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-kerning: normal;
   padding-bottom: var(--bar-h);
   overflow-x: clip;
 }
@@ -100,28 +100,27 @@ select {
   font: inherit;
   color: inherit;
 }
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-}
 button {
   cursor: pointer;
   background: none;
   border: 0;
   padding: 0;
 }
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
 :focus-visible {
-  outline: 3px solid var(--yellow);
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
-.on-yellow :focus-visible,
-.on-light :focus-visible {
-  outline-color: var(--black);
+.on-dark :focus-visible {
+  outline-color: var(--yellow);
 }
 ::selection {
   background: var(--yellow);
-  color: var(--black);
+  color: var(--ink);
 }
 .sr-only {
   position: absolute !important;
@@ -138,8 +137,8 @@ button {
   z-index: 100;
   padding: 10px 14px;
   background: var(--yellow);
-  color: var(--black);
-  font-weight: 600;
+  color: var(--ink);
+  font: 600 0.9rem var(--sans);
   transform: translateY(-200%);
 }
 .skip:focus {
@@ -153,159 +152,260 @@ button {
   padding-inline: var(--gutter);
 }
 
-.on-dark {
-  background: var(--black);
-  color: var(--white);
-  --soft: #bdb8ad;
-  --rule: rgb(255 255 255 / 0.16);
-}
+/* surfaces */
 .on-light {
-  background: var(--white);
-  color: var(--black);
-  --soft: var(--grey);
-  --rule: rgb(17 17 16 / 0.14);
+  background: var(--paper);
+  color: var(--ink);
+  --soft: var(--ink-soft);
+  --rule: rgb(21 20 19 / 0.16);
+  --rule-strong: var(--ink);
 }
 .on-stone {
-  background: var(--stone);
-  color: var(--black);
-  --soft: var(--grey);
-  --rule: rgb(17 17 16 / 0.14);
+  background: var(--paper-2);
+  color: var(--ink);
+  --soft: var(--ink-soft);
+  --rule: rgb(21 20 19 / 0.16);
+  --rule-strong: var(--ink);
 }
-.on-yellow {
-  background: var(--yellow);
-  color: var(--black);
-  --soft: #4a3c00;
-  --rule: rgb(17 17 16 / 0.2);
+.on-dark {
+  background: var(--night);
+  color: #f1ece2;
+  --soft: #aaa397;
+  --rule: rgb(241 236 226 / 0.18);
+  --rule-strong: #f1ece2;
+  color-scheme: dark;
 }
 
-/* ---------------------------------------------------------------- type
- * One label style, one heading style, one body style. Nothing else.
- */
+/* ---------------------------------------------------------------- type */
 
+/* labels, folios, captions: the grotesk, small and tracked */
+.label,
 .eyebrow {
   display: block;
-  margin-bottom: 14px;
-  font: 600 0.72rem/1.3 var(--sans);
-  letter-spacing: 0.16em;
+  font: 600 0.7rem/1.35 var(--sans);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--soft);
 }
-.on-dark .eyebrow {
-  color: var(--yellow);
-}
 
+/* feature headlines: Newsreader at display size, italics for the turn of phrase */
+.headline {
+  font-family: var(--serif);
+  font-weight: 380;
+  font-variation-settings: 'opsz' 72;
+  font-size: clamp(2.5rem, 1.3rem + 4vw, 5.2rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.headline em,
+.title em,
+.subtitle em {
+  font-style: italic;
+}
 .title {
-  font: 400 clamp(2.2rem, 1.35rem + 2.9vw, 3.9rem) / 1.04 var(--display);
-  letter-spacing: -0.01em;
+  font-family: var(--serif);
+  font-weight: 380;
+  font-variation-settings: 'opsz' 72;
+  font-size: clamp(2rem, 1.3rem + 2.4vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 .title--xl {
-  font-size: clamp(2.6rem, 1.4rem + 4.4vw, 5.4rem);
+  font-size: clamp(2.6rem, 1.4rem + 4.2vw, 5.4rem);
   line-height: 1;
+  letter-spacing: -0.025em;
 }
 .subtitle {
-  font: 400 clamp(1.45rem, 1.2rem + 0.9vw, 1.9rem) / 1.12 var(--display);
+  font-family: var(--serif);
+  font-weight: 400;
+  font-variation-settings: 'opsz' 48;
+  font-size: clamp(1.4rem, 1.15rem + 0.8vw, 1.85rem);
+  line-height: 1.12;
+  letter-spacing: -0.012em;
   text-wrap: balance;
+}
+/* standfirst: the paragraph that sets up a feature */
+.standfirst,
+.lead {
+  font-family: var(--serif);
+  font-variation-settings: 'opsz' 24;
+  font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.38rem);
+  line-height: 1.45;
+  max-width: 38ch;
+  text-wrap: pretty;
 }
 .lead {
   margin-top: 18px;
-  font-size: clamp(1.06rem, 1rem + 0.3vw, 1.2rem);
-  line-height: 1.6;
-  max-width: 44ch;
-  color: var(--soft);
-  text-wrap: pretty;
+  color: var(--ink-2);
 }
-.on-dark .lead {
-  color: #cfcac0;
+.on-dark .lead,
+.on-dark .standfirst {
+  color: #ddd6c9;
 }
 
-/* Their printed menus set section names between dashes: "— Pizza —". Used on menus only. */
+/* their printed menus set section names between dashes: "— Pizza —" */
 .dashed {
   display: flex;
   align-items: center;
-  gap: 0.6em;
-  font: 400 1.05rem/1.2 var(--display);
-  letter-spacing: 0.1em;
+  gap: 0.7em;
+  font: 600 0.72rem/1.2 var(--sans);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 .dashed::before,
 .dashed::after {
   content: '';
-  width: 1.2em;
+  width: 1.4em;
   height: 1px;
   background: currentColor;
 }
 
-/* Section rhythm */
+/* a feature's opening: heavy rule, number and name, then the headline */
 .section {
   padding-block: var(--section-y);
 }
 .section-head {
-  max-width: 760px;
+  max-width: 880px;
   margin-bottom: clamp(36px, 4vw, 56px);
 }
+.kicker-row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding-top: 12px;
+  margin-bottom: clamp(22px, 3vw, 36px);
+  border-top: 2px solid var(--rule-strong);
+  font: 600 0.72rem/1.3 var(--sans);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.kicker-row .no {
+  color: var(--soft);
+}
+.kicker-row .rest {
+  margin-left: auto;
+  color: var(--soft);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-align: right;
+}
+@media (max-width: 899px) {
+  .kicker-row .rest {
+    display: none;
+  }
+}
 
-/* ---------------------------------------------------------------- buttons */
+.caption {
+  margin-top: 10px;
+  font: 400 0.82rem/1.45 var(--sans);
+  color: var(--soft);
+}
+.caption b {
+  font-weight: 600;
+  color: var(--ink);
+}
+.on-dark .caption b {
+  color: #f1ece2;
+}
+
+.pull {
+  margin: 0;
+}
+.pull p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-variation-settings: 'opsz' 60;
+  font-size: clamp(1.45rem, 1.15rem + 1vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.pull cite {
+  display: block;
+  margin-top: 12px;
+  font: 600 0.7rem/1.3 var(--sans);
+  font-style: normal;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+.quote {
+  margin: 0;
+  padding-left: 16px;
+  border-left: 2px solid var(--yellow);
+}
+.quote p {
+  font-style: italic;
+  line-height: 1.5;
+}
+.quote cite {
+  display: block;
+  margin-top: 6px;
+  font: 600 0.68rem/1.3 var(--sans);
+  font-style: normal;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+/* ---------------------------------------------------------------- buttons and links */
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.6em;
-  min-height: 50px;
-  padding: 0 1.5em;
-  font: 600 0.84rem/1 var(--sans);
-  letter-spacing: 0.1em;
+  min-height: 48px;
+  padding: 0 1.4em;
+  font: 600 0.78rem/1 var(--sans);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
-  transition: background-color 250ms var(--pour), color 250ms var(--pour), transform 400ms var(--pour);
+  border-radius: 0;
+  transition: background-color 200ms ease, color 200ms ease;
 }
-.btn:active {
-  transform: translateY(1px);
+.btn--black {
+  background: var(--ink);
+  color: var(--paper);
+}
+.btn--black:hover {
+  background: #33302c;
 }
 .btn--yellow {
   background: var(--yellow);
-  color: var(--black);
+  color: var(--ink);
 }
 .btn--yellow:hover {
-  background: var(--yellow-sun);
-}
-.btn--black {
-  background: var(--black);
-  color: var(--white);
-}
-.btn--black:hover {
-  background: #2c2b28;
+  background: #ffd23d;
 }
 .btn--line {
-  box-shadow: inset 0 0 0 2px currentColor;
+  box-shadow: inset 0 0 0 1px currentColor;
 }
 .btn--line:hover {
-  background: rgb(127 127 127 / 0.12);
+  background: rgb(127 127 127 / 0.1);
 }
 .btn--small {
-  min-height: 42px;
-  padding: 0 1.15em;
-  font-size: 0.76rem;
+  min-height: 40px;
+  padding: 0 1.1em;
+  font-size: 0.72rem;
 }
-
 .link {
   display: inline-flex;
   align-items: baseline;
   gap: 0.4em;
-  font: 600 0.98rem/1.3 var(--sans);
+  font: 600 0.78rem/1.3 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.3em;
-  text-decoration-color: var(--yellow);
-  transition: text-decoration-color 250ms var(--pour);
-}
-.on-yellow .link {
-  text-decoration-color: var(--black);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.45em;
 }
 .link:hover {
-  text-decoration-color: currentColor;
+  text-decoration-color: var(--yellow);
+  text-decoration-thickness: 2px;
 }
 
 /* ---------------------------------------------------------------- photos */
@@ -316,7 +416,7 @@ button {
   overflow: hidden;
   background-size: cover;
   background-position: center;
-  background-color: #2a2926;
+  background-color: var(--paper-3);
 }
 .img img {
   width: 100%;

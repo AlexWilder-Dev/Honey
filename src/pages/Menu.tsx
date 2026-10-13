@@ -17,6 +17,11 @@ export function Menu() {
     }
   }, [])
 
+  // keep the chosen tab in view in the scrolling tab bar (phones)
+  useEffect(() => {
+    tabs.current?.querySelector<HTMLElement>(`#tab-${tab}`)?.scrollIntoView({ block: 'nearest', inline: 'center' })
+  }, [tab])
+
   if (!current) return <Navigate to="/menu" replace />
 
   const go = (id: string, focus = false) => {
@@ -62,9 +67,14 @@ export function Menu() {
   return (
     <main className="menu on-light" id="main">
       <header className="wrap menu__head">
-        <span className="eyebrow">The menu</span>
-        <h1 className="title title--xl">Small plates, pizzas &amp; the Hive List</h1>
-        <p className="lead">“{menuTagline}.”</p>
+        <p className="kicker-row">
+          <span className="no">The menu</span>
+          <span>Eat &amp; drink</span>
+        </p>
+        <h1 className="headline">
+          Small plates, pizzas <em>&amp; the Hive List</em>
+        </h1>
+        <p className="standfirst">“{menuTagline}.”</p>
         <p className="menu__how">
           V is vegetarian. Allergies or dietary needs? Have a word with the team before you order.
         </p>

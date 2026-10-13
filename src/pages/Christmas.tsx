@@ -18,9 +18,14 @@ export function Christmas() {
     <main className="xmas on-dark" id="main">
       <div className="wrap xmas__grid">
         <div className="xmas__head">
-          <span className="eyebrow">Christmas 2026</span>
-          <h1 className="title title--xl">Three courses, £{christmas.price}</h1>
-          <p className="lead">A head, with a welcome drink to start: a glass of Prosecco, a bottled beer or a soft drink.</p>
+          <p className="kicker-row">
+            <span className="no">Special</span>
+            <span>Christmas 2026</span>
+          </p>
+          <h1 className="headline">
+            Three courses, <em>£{christmas.price} a head</em>
+          </h1>
+          <p className="standfirst">With a welcome drink to start: a glass of Prosecco, a bottled beer or a soft drink.</p>
           <div className="xmas__actions">
             <button type="button" className="btn btn--yellow" onClick={book}>
               Book your Christmas table

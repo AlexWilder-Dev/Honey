@@ -50,6 +50,13 @@ export function overrideFromLocation(loc: Location = window.location): Moment | 
   return parseAt(fromSearch ?? fromHash)
 }
 
+/** "Autumn 2026", for the cover's dateline. */
+export function seasonLine(date = new Date()) {
+  const { month, year } = londonParts(date)
+  const season = ['Winter', 'Winter', 'Spring', 'Spring', 'Spring', 'Summer', 'Summer', 'Summer', 'Autumn', 'Autumn', 'Autumn', 'Winter'][month - 1]
+  return `${season} ${year}`
+}
+
 /** After midnight counts as the night before, until 5am. */
 export function serviceMoment({ day, minutes }: Moment): Moment {
   return minutes < 5 * 60 ? { day: (day + 6) % 7, minutes: minutes + 24 * 60 } : { day, minutes }

@@ -14,14 +14,14 @@ export function Header() {
           <Wordmark />
         </Link>
         <nav className="header__nav" aria-label="Main">
-          <button type="button" onClick={() => goto('on')}>What’s on</button>
           <Link to="/menu">Menu</Link>
+          <button type="button" onClick={() => goto('on')}>Diary</button>
           <button type="button" onClick={() => goto('house')}>The house</button>
           <button type="button" onClick={() => goto('visit')}>Visit</button>
           <Link to="/christmas">Christmas</Link>
         </nav>
         <RightNow className="header__now" />
-        <button type="button" className="btn btn--yellow btn--small header__book" onClick={() => openBooking()}>
+        <button type="button" className="btn btn--black btn--small header__book" onClick={() => openBooking()}>
           Book a table
         </button>
         <button type="button" className="header__burger" onClick={openNav} aria-label="Open navigation">

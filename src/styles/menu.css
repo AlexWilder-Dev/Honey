@@ -1,4 +1,4 @@
-/* ================================================================ menu page */
+/* ================================================================ menu page, set like their printed menu */
 
 .menu {
   padding-bottom: var(--section-y);
@@ -6,19 +6,24 @@
 }
 .menu__head {
   display: grid;
-  gap: 16px;
-  padding-block: clamp(44px, 6vw, 96px) clamp(24px, 3vw, 36px);
+  gap: 20px;
+  padding-block: clamp(36px, 5vw, 72px) clamp(26px, 3vw, 40px);
+}
+.menu__head .kicker-row {
+  margin-bottom: 4px;
 }
 .menu__how {
   max-width: 64ch;
+  font-style: italic;
   color: var(--soft);
-  font-size: 0.95rem;
 }
 .tabs-bar {
   position: sticky;
   top: var(--chrome-top);
   z-index: 20;
-  background: var(--yellow);
+  background: var(--paper);
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
 }
 .tabs-bar .wrap {
   display: flex;
@@ -28,8 +33,8 @@
 .tabs {
   display: flex;
   align-items: center;
-  gap: 6px 10px;
-  padding-block: 10px;
+  gap: 4px 6px;
+  padding-block: 6px;
   overflow-x: auto;
   scrollbar-width: none;
   flex: 1;
@@ -39,7 +44,6 @@
   display: none;
 }
 @media (max-width: 899px) {
-  /* a soft edge says there's more to swipe to */
   .tabs {
     -webkit-mask-image: linear-gradient(90deg, #000 82%, transparent);
     mask-image: linear-gradient(90deg, #000 82%, transparent);
@@ -48,35 +52,39 @@
 }
 .tabs__group {
   display: flex;
-  gap: 4px;
+  gap: 2px;
 }
 .tabs__sep {
   flex: none;
-  width: 2px;
-  height: 26px;
-  background: var(--black);
-  margin-inline: 6px;
+  width: 1px;
+  height: 22px;
+  background: var(--rule);
+  margin-inline: 8px;
 }
 .tabs__tab {
-  min-height: 44px;
-  padding: 0 14px;
-  font: 500 0.88rem/1 var(--sans);
-  letter-spacing: 0.06em;
+  min-height: 42px;
+  padding: 0 12px;
+  font: 600 0.7rem/1 var(--sans);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   white-space: nowrap;
-  transition: background 250ms var(--pour), color 250ms var(--pour);
+  color: var(--ink-soft);
+  transition: color 150ms ease, background 150ms ease;
 }
 .tabs__tab:hover {
-  background: rgb(0 0 0 / 0.08);
+  color: var(--ink);
 }
 .tabs__tab.is-on {
-  background: var(--black);
-  color: var(--yellow);
+  background: var(--ink);
+  color: var(--paper);
 }
 .tabs__xmas {
   flex: none;
-  font: 600 0.85rem/1 var(--sans);
+  font-style: italic;
+  font-size: 0.98rem;
   text-decoration: underline;
+  text-decoration-color: var(--yellow);
+  text-decoration-thickness: 2px;
   text-underline-offset: 0.3em;
 }
 .menu__panel {
@@ -85,6 +93,7 @@
 .menu__panel--many {
   columns: 2;
   column-gap: clamp(40px, 6vw, 96px);
+  column-rule: 1px solid var(--rule);
 }
 .menu__panel--one {
   max-width: 760px;
@@ -96,14 +105,18 @@
 .menu__section-title {
   display: flex;
   align-items: center;
-  gap: 0.5em;
-  margin-bottom: 8px;
-  font: 400 1.5rem/1.1 var(--display);
-  letter-spacing: 0.06em;
+  gap: 0.7em;
+  margin-bottom: 12px;
+  font: 600 0.72rem/1.2 var(--sans);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
-.menu__section-title::before {
-  content: '—';
+.menu__section-title::before,
+.menu__section-title::after {
+  content: '';
+  width: 1.4em;
+  height: 1px;
+  background: currentColor;
 }
 @media (max-width: 899px) {
   .menu__panel--many {
@@ -117,43 +130,48 @@
 /* ================================================================ christmas */
 
 .xmas {
-  padding-block: clamp(44px, 6vw, 96px) var(--section-y);
+  padding-block: clamp(36px, 5vw, 72px) var(--section-y);
   min-height: 100svh;
 }
 .xmas__grid {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: clamp(32px, 6vw, 100px);
+  gap: clamp(36px, 6vw, 104px);
   align-items: start;
 }
 .xmas__head {
   display: grid;
-  gap: 18px;
+  gap: 22px;
   justify-items: start;
 }
-.xmas__head .title {
+.xmas__head .kicker-row {
+  width: 100%;
+  margin-bottom: 0;
+}
+.xmas__head .headline em {
   color: var(--yellow);
 }
 .xmas__small {
-  font-size: 0.9rem;
+  font-style: italic;
   color: var(--soft);
   max-width: 40ch;
 }
 .xmas__poster {
-  width: min(320px, 80%);
+  width: min(300px, 80%);
   aspect-ratio: 4 / 5;
-  margin-top: 16px;
+  margin-top: 8px;
 }
 .xmas__menu {
   display: grid;
-  gap: 36px;
+  gap: 40px;
   justify-items: start;
+  padding-top: 14px;
 }
 .xmas__course {
   width: 100%;
 }
 .xmas__course h2 {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: var(--yellow);
 }
 .xmas__course li {
@@ -161,10 +179,15 @@
   border-bottom: 1px solid var(--rule);
 }
 .xmas__course h3 {
-  font: 400 clamp(1.3rem, 1.1rem + 0.8vw, 1.8rem) / 1.15 var(--display);
+  font-weight: 400;
+  font-variation-settings: 'opsz' 48;
+  font-size: clamp(1.35rem, 1.15rem + 0.7vw, 1.8rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 .xmas__course p {
   margin-top: 4px;
+  font-style: italic;
   color: var(--soft);
 }
 .xmas__note {

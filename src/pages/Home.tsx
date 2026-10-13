@@ -5,7 +5,7 @@ import { Drink } from '../sections/Drink'
 import { Eat } from '../sections/Eat'
 import { House } from '../sections/House'
 import { Press } from '../sections/Press'
-import { Hero } from '../sections/Hero'
+import { Cover } from '../sections/Cover'
 import { Visit } from '../sections/Visit'
 import { WhatsOn } from '../sections/WhatsOn'
 
@@ -25,7 +25,7 @@ export function Home() {
 
   return (
     <>
-      <Hero />
+      <Cover />
       <Eat />
       <Drink />
       <WhatsOn />

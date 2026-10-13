@@ -7,7 +7,6 @@ export function Footer() {
     <footer className="footer">
       <div className="wrap footer__row">
         <Monogram className="footer__mono" />
-        <p className="footer__strap">{venue.strapline}</p>
         <p className="footer__line">
           {venue.name} · {venue.street}, {venue.city} {venue.postcode} · <a href={venue.phoneHref}>{venue.phone}</a>
         </p>
@@ -19,7 +18,9 @@ export function Footer() {
           </a>
         </nav>
       </div>
-      <p className="wrap footer__credit">Site by AlexWilder-Dev</p>
+      <div className="wrap">
+        <p className="footer__credit">Site by AlexWilder-Dev</p>
+      </div>
     </footer>
   )
 }

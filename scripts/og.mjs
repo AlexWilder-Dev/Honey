@@ -11,19 +11,27 @@ const fontFile = (f) => {
 }
 const roman = fontFile('libre-caslon-text-latin-400-normal.woff')
 const italic = fontFile('libre-caslon-text-latin-400-italic.woff')
-const della = (() => {
-  const b = readFileSync('node_modules/@fontsource/della-respira/files/della-respira-latin-400-normal.woff')
-  return opentype.parse(b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength))
-})()
-
-// their brand: black, white and the yellow of the awnings and front door
-const CREAM = '#ffffff'
-const HONEY = '#ffc700'
+// the site's paper and ink, with their yellow
+const CREAM = '#f4f0e7'
+const HONEY = '#f4b800'
 const DOOR = '#ffc700'
-const CHAR = '#111110'
+const CHAR = '#151413'
 
-const path = (font, text, x, y, size) => font.getPath(text, x, y, size).toPathData(2)
+const path = (font, text, x, y, size) => font.getPath(text, x, y, size, { features: { liga: false, rlig: false } }).toPathData(2)
 const width = (font, text, size) => font.getAdvanceWidth(text, size)
+// glyph by glyph, no shaping: the Caslon ligature tables garble "St" otherwise
+// each glyph is its own path, so one odd outline can't spoil the rest of the line
+const plain = (font, text, x, y, size, fill, opacity = 1) => {
+  const scale = size / font.unitsPerEm
+  let out = ''
+  for (const ch of text) {
+    const g = font.charToGlyph(ch)
+    const d = g.getPath(x, y, size).toPathData(2)
+    if (d) out += `<path d="${d}Z" fill="${fill}" fill-opacity="${opacity}"/>`
+    x += g.advanceWidth * scale
+  }
+  return out
+}
 
 // "Hive" set in from the left, "Honey" below, a swash ampersand between them:
 // the arrangement on their signage and printed menus.
@@ -66,31 +74,38 @@ function monogram(ox, oy, r, ink, amp, stroke) {
 }
 
 // ---------- og.jpg ----------
+// Their courtyard photo on the left, the masthead on paper on the right.
 const W = 1200, H = 630
-const photo = await sharp('public/media/site/R5_HIVE_003.JPG')
+const display = (() => {
+  const b = readFileSync('node_modules/@fontsource/libre-caslon-display/files/libre-caslon-display-latin-400-normal.woff')
+  return opentype.parse(b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength))
+})()
+const photoW = 560
+const photo = await sharp('public/media/site/R5_HIVE_085.JPG')
   .rotate()
-  .resize({ width: 1200 })
-  .extract({ left: 0, top: 560, width: W, height: H })
-  .modulate({ brightness: 1.02, saturation: 1.05 })
+  .resize({ width: 820 })
+  .extract({ left: 150, top: 330, width: photoW, height: H })
   .toBuffer()
 
-const size = 118
-const panelX = 700
-const textX = 760
-const overlay = `
+const x0 = photoW + 56
+const mast = (text, font, x, y, size, fill) => `<path d="${path(font, text, x, y, size)}" fill="${fill}"/>`
+const sans = (text, x, y) => plain(display, text, x, y, 16, CHAR, 0.8)
+const panel = `
 <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
-  <rect x="${panelX}" y="0" width="${W - panelX}" height="${H}" fill="${CHAR}"/>
-  <rect x="${panelX}" y="0" width="${W - panelX}" height="34" fill="${HONEY}"/>
-  <rect x="${panelX}" y="34" width="${W - panelX}" height="12" fill="#e3a900"/>
-  ${wordmark(textX, 230, size)}
-  <path d="${path(della, '42 SILVER STREET', textX + 4, 452, 34)}" fill="${CREAM}"/>
-  <path d="${path(della, 'LEICESTER', textX + 4, 494, 34)}" fill="${CREAM}"/>
-  <rect x="${textX + 4}" y="530" width="72" height="4" fill="${HONEY}"/>
-  <path d="${path(della, 'COCKTAILS · SHARING PLATES · COURTYARD', textX + 4, 574, 15.5)}" fill="#bdb8ad"/>
+  <rect width="${W}" height="${H}" fill="${CREAM}"/>
+  <rect x="${x0}" y="70" width="${W - x0 - 56}" height="1.5" fill="${CHAR}"/>
+  ${sans('NO. 42 SILVER STREET · LEICESTER', x0, 56)}
+  ${mast('Hive', display, x0 - 4, 236, 150, CHAR)}
+  ${mast('&', italic, x0 + 300, 236, 120, HONEY)}
+  ${mast('Honey', display, x0 - 4, 384, 150, CHAR)}
+  <rect x="${x0}" y="430" width="${W - x0 - 56}" height="4" fill="${CHAR}"/>
+  <rect x="${x0}" y="438" width="${W - x0 - 56}" height="1.5" fill="${CHAR}"/>
+  ${plain(italic, 'Cocktails, sharing plates', x0, 492, 34, CHAR)}
+  ${plain(italic, '& a courtyard round the back.', x0, 534, 34, CHAR)}
 </svg>`
 
-await sharp(photo)
-  .composite([{ input: Buffer.from(overlay), top: 0, left: 0 }])
+await sharp(Buffer.from(panel))
+  .composite([{ input: photo, top: 0, left: 0 }])
   .jpeg({ quality: 88, mozjpeg: true })
   .toFile('public/og.jpg')
 

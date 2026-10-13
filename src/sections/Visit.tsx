@@ -20,19 +20,25 @@ export function Visit() {
   ]
 
   return (
-    <section id="visit" className="visit section on-dark" aria-labelledby="visit-title">
+    <section id="visit" className="visit section on-light" aria-labelledby="visit-title">
+      <div className="wrap">
+        <p className="kicker-row">
+          <span className="no">No. 06</span>
+          <span>Visit</span>
+          <span className="rest">Walk-ins welcome</span>
+        </p>
+      </div>
       <div className="wrap visit__grid">
         <div className="visit__where">
-          <span className="eyebrow">Visit</span>
-          <h2 className="title title--xl" id="visit-title">
+          <h2 className="headline" id="visit-title">
             {venue.street}
           </h2>
-          <p className="lead">
+          <p className="standfirst">
             {venue.city} {venue.postcode}, in the Old Town, right next to St Martin’s Square. Walk-ins are “greeted with open wings”, or book
             ahead.
           </p>
           <div className="visit__actions">
-            <button type="button" className="btn btn--yellow" onClick={() => openBooking()}>
+            <button type="button" className="btn btn--black" onClick={() => openBooking()}>
               Book a table
             </button>
             <a className="btn btn--line" href={venue.directions} target="_blank" rel="noreferrer">

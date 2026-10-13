@@ -3,16 +3,7 @@ import { DishRow } from '../components/DishRow'
 import { Img } from '../components/Img'
 import { countItems, pick } from '../data/menu'
 
-const plates = pick(
-  'salted-cod-pakora',
-  'wagyu-anticucho-bite',
-  'red-leicester-terrine',
-  'crispy-squid',
-  'mojo-verde-pork-belly',
-  'scallops-causa',
-  'short-rib-moussaka',
-  'tzatziki-foam',
-)
+const plates = pick('salted-cod-pakora', 'wagyu-anticucho-bite', 'red-leicester-terrine', 'crispy-squid', 'mojo-verde-pork-belly', 'scallops-causa', 'short-rib-moussaka', 'tzatziki-foam')
 const pizzas = pick('margherita', 'aubergine', 'spicy', 'tuna')
 
 /** A dish someone in print picked out, quoted beside it. */
@@ -22,35 +13,47 @@ const notes: Record<string, { quote: string; by: string }> = {
 
 export function Eat() {
   return (
-    <section id="eat" className="course course--eat section on-stone" aria-labelledby="eat-title">
-      <div className="wrap course__grid">
-        <div className="course__head">
-          <span className="eyebrow">Eat</span>
-          <h2 className="title" id="eat-title">
-            Small plates &amp; pizzas
-          </h2>
-          <p className="lead">
-            From the team behind Dom in Thurlaston, a Great Food Club Restaurant of the Year finalist in 2022/23. Globally inspired plates
-            with Asian flavours running through, built for sharing.
-          </p>
-          <Img k="hero-plates" sizes="(min-width: 900px) 34vw, 92vw" position="50% 40%" className="course__photo" />
-        </div>
+    <section id="eat" className="feature section on-light" aria-labelledby="eat-title">
+      <div className="wrap">
+        <p className="kicker-row">
+          <span className="no">No. 01</span>
+          <span>Eat</span>
+          <span className="rest">Kitchen noon–3 &amp; 5–11 · Mondays from 5</span>
+        </p>
+        <div className="feature__grid">
+          <header className="feature__head">
+            <h2 className="headline" id="eat-title">
+              Small plates, <em>passed around</em>
+            </h2>
+            <p className="standfirst">
+              The kitchen comes from Dom in Thurlaston, a Great Food Club Restaurant of the Year finalist in 2022/23. Here they cook globally
+              inspired plates with Asian flavours running through, and a short list of pizzas.
+            </p>
+            <figure className="feature__figure">
+              <Img k="hero-plates" sizes="(min-width: 900px) 36vw, 92vw" position="50% 40%" className="feature__img" />
+              <figcaption className="caption">
+                <b>A table’s worth.</b> Order a few each and put everything in the middle.
+              </figcaption>
+            </figure>
+          </header>
 
-        <div className="course__list">
-          <ul className="dishes dishes--big">
-            {plates.map((it) => (
-              <DishRow key={it.id} item={it} size="big" note={notes[it.id]} />
-            ))}
-          </ul>
-          <h3 className="dashed course__sub">Pizza</h3>
-          <ul className="dishes">
-            {pizzas.map((it) => (
-              <DishRow key={it.id} item={it} />
-            ))}
-          </ul>
-          <Link to="/menu/plates" className="link course__more">
-            All {countItems('plate')} plates, pizzas and desserts →
-          </Link>
+          <div className="feature__menu">
+            <h3 className="dashed">Plates</h3>
+            <ul className="dishes">
+              {plates.map((it) => (
+                <DishRow key={it.id} item={it} size="big" note={notes[it.id]} />
+              ))}
+            </ul>
+            <h3 className="dashed feature__sub">Pizza</h3>
+            <ul className="dishes">
+              {pizzas.map((it) => (
+                <DishRow key={it.id} item={it} />
+              ))}
+            </ul>
+            <Link to="/menu/plates" className="link feature__more">
+              All {countItems('plate')} plates, pizzas and desserts →
+            </Link>
+          </div>
         </div>
       </div>
     </section>
