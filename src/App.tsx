@@ -4,10 +4,8 @@ import { HashRouter, Navigate, Route, Routes, useLocation } from 'react-router-d
 import { BottomBar } from './components/BottomBar'
 import { Header } from './components/Header'
 import { MobileNav } from './components/MobileNav'
-import { TablePill, TableSheet } from './components/TableTray'
 import { Home } from './pages/Home'
 import { Footer } from './sections/Footer'
-import { TableProvider, useTable } from './state/table'
 import { UiProvider, useUi } from './state/ui'
 
 const Menu = lazy(() => import('./pages/Menu').then((m) => ({ default: m.Menu })))
@@ -38,22 +36,12 @@ function ScrollToTop() {
   return null
 }
 
-function Announcer() {
-  const { announcement } = useTable()
-  return (
-    <p className="sr-only" aria-live="polite" role="status">
-      {announcement}
-    </p>
-  )
-}
-
 export function App() {
   return (
     <HashRouter>
       <MotionConfig reducedMotion="user">
         <LazyMotion features={motionFeatures} strict>
           <UiProvider>
-            <TableProvider>
               <a className="skip" href="#main" onClick={(e) => { e.preventDefault(); document.getElementById('main')?.focus() }}>
                 Skip to content
               </a>
@@ -67,13 +55,9 @@ export function App() {
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
               <Footer />
-              <TablePill />
               <BottomBar />
-              <TableSheet />
               <Booking />
               <MobileNav />
-              <Announcer />
-            </TableProvider>
           </UiProvider>
         </LazyMotion>
       </MotionConfig>

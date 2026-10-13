@@ -18,6 +18,7 @@ const PHOTOS = {
   backbar: ['site/WhatsApp_Image_2025-06-09_at_14.38.52_4dbe47d2.jpg', 'The back bar, rope lanterns hanging above the shakers'],
   espresso: ['site/WhatsApp_Image_2025-06-25_at_18.26.19_729743f9.jpg', 'An espresso martini on the bar'],
   'courtyard-day': ['site/WhatsApp_Image_2025-06-25_at_18.21.23_87da8423.jpg', 'The courtyard in sunshine: green chairs, timber tables, old brick walls'],
+  'courtyard-crowd': ['site/R5_HIVE_085.JPG', 'A full courtyard in the early evening: festoon lights, the globe lamp, the hexagon mural and the old brick wing behind'],
   'courtyard-night': ['site/R5_HIVE_113.JPG', 'The courtyard at night under the globe lamp'],
   upstairs: ['site/WhatsApp_Image_2026-01-23_at_23.53.52_16.jpg', 'Dinner upstairs in the rear wing, under curved timber braces and fairy lights'],
   'upstairs-room': ['site/R5_HIVE_071.JPG', 'Tables under the old roof timbers, a wall of birch branches lit from below'],

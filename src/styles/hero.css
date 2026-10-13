@@ -1,0 +1,230 @@
+/* ================================================================
+ * Landing: their wordmark and the pitch on black, the courtyard on
+ * the right at full height, and the scrolling address band from
+ * their own homepage underneath.
+ * ================================================================ */
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
+  min-height: calc(100svh - var(--chrome-top));
+  background: var(--black);
+  color: var(--white);
+  --soft: #bdb8ad;
+}
+
+.hero__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 6vh, 80px) clamp(24px, 5vw, 88px);
+  padding-left: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+}
+.hero__text .eyebrow {
+  margin-bottom: clamp(20px, 3vh, 36px);
+}
+
+/* their stacked lockup, large: Hive set in, the ampersand tucked between, Honey below */
+.hero__mark {
+  margin: 0;
+  font-size: clamp(4.4rem, 1.6rem + 7.4vw, 10.5rem);
+  font-weight: 400;
+  line-height: 1;
+  --wm-bg: var(--black);
+  --amp: var(--yellow);
+}
+.hero__lead {
+  max-width: 34ch;
+  margin-top: clamp(24px, 4vh, 44px);
+  font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
+  line-height: 1.55;
+  color: #dcd8cf;
+}
+.hero__now {
+  margin-top: clamp(24px, 4vh, 40px);
+  padding-top: 18px;
+  border-top: 1px solid rgb(255 255 255 / 0.16);
+  max-width: 34rem;
+}
+.hero__now .now {
+  font-size: 0.98rem;
+}
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.hero__photo {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+.hero__photo .img {
+  position: absolute;
+  inset: 0;
+}
+.hero__photo figcaption {
+  position: absolute;
+  right: 16px;
+  bottom: 14px;
+  z-index: 2;
+  padding: 6px 10px;
+  background: rgb(17 17 16 / 0.72);
+  font: 600 0.68rem/1 var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+/* the band from their homepage: "42 silver Street — Leicester, le1 5et *" */
+.ticker {
+  grid-column: 1 / -1;
+  overflow: hidden;
+  background: var(--yellow);
+  color: var(--black);
+  border-top: 1px solid var(--black);
+}
+.ticker__run {
+  display: flex;
+  width: max-content;
+  animation: ticker 48s linear infinite;
+}
+.ticker__set {
+  display: flex;
+  flex: none;
+}
+.ticker__set > span {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 0;
+  font: 400 clamp(1rem, 0.9rem + 0.4vw, 1.3rem) / 1 var(--display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.ticker i {
+  margin: 0 1.1em;
+  font-style: normal;
+}
+@keyframes ticker {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker__run {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------- the pomsky */
+
+.pomsky {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.pomsky__dog {
+  position: absolute;
+  left: 8%;
+  bottom: 0;
+  width: clamp(110px, 16%, 170px);
+  display: block;
+}
+.pomsky__dog svg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 6px 12px rgb(0 0 0 / 0.4));
+}
+.pomsky__eye,
+.pomsky__ear {
+  transform-box: fill-box;
+}
+.pomsky__eye {
+  transform-origin: 50% 50%;
+}
+.pomsky__ear--l {
+  transform-origin: 60% 100%;
+}
+.pomsky__ear--r {
+  transform-origin: 40% 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .is-up .pomsky__eye {
+    animation: blink 2.6s 0.9s infinite;
+  }
+  .is-up .pomsky__ear--r {
+    animation: twitch 0.5s 0.5s 2;
+  }
+}
+@keyframes blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+@keyframes twitch {
+  50% {
+    transform: rotate(12deg);
+  }
+}
+.pomsky__woof {
+  position: absolute;
+  z-index: 3;
+  left: calc(8% + clamp(110px, 16%, 170px) - 6px);
+  bottom: clamp(96px, 14%, 150px);
+  padding: 0.55em 0.85em;
+  border-radius: 1em 1em 1em 0.2em;
+  background: var(--white);
+  color: var(--black);
+  font: 600 0.9rem/1 var(--sans);
+  white-space: nowrap;
+  transform-origin: 0 100%;
+}
+
+/* ---------------------------------------------------------------- phones: photo first */
+
+@media (max-width: 899px) {
+  .hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    min-height: 0;
+  }
+  .hero__photo {
+    order: -1;
+    aspect-ratio: 4 / 5;
+    max-height: 64svh;
+    width: 100%;
+  }
+  .hero__text {
+    padding: 28px var(--gutter) 36px;
+  }
+  .hero__text .eyebrow {
+    margin-bottom: 18px;
+  }
+  .hero__mark {
+    font-size: clamp(3.6rem, 2rem + 9vw, 5rem);
+  }
+  .hero__lead {
+    margin-top: 22px;
+  }
+  /* the header strip already says what's on right now */
+  .hero__now {
+    display: none;
+  }
+  .ticker__set > span {
+    padding: 12px 0;
+  }
+}

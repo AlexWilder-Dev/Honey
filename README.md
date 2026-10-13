@@ -23,7 +23,7 @@ npm run build     # typecheck + build into docs/ (what GitHub Pages serves)
 
 ## Easter egg
 
-Tap the cocktail bar window (left of the door) five times within a second.
+Tap the courtyard photo at the top of the home page five times within a second.
 
 ## Where things live
 

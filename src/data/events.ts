@@ -88,9 +88,3 @@ export function upcoming(): VenueEvent[] {
   const rank = (e: VenueEvent) => (e.id === 'christmas' ? '9' : e.from)
   return events.filter((e) => e.to >= today).sort((a, b) => rank(a).localeCompare(rank(b)))
 }
-
-/** The next dated night out, for the A-board on the pavement. */
-export function nextEvent() {
-  const today = todayKey()
-  return events.filter((e) => e.id !== 'christmas' && e.to >= today).sort((a, b) => a.from.localeCompare(b.from))[0] ?? null
-}

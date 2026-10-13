@@ -2,13 +2,13 @@ import { AnimatePresence, m } from 'framer-motion'
 import { snap } from '../lib/motion'
 
 /**
- * Easter egg: a small pomsky lives in the front window. Only the tips of its ears
- * show above the grass, until somebody taps the glass five times in a second.
+ * Easter egg: a small pomsky hides just below the edge of the courtyard photo,
+ * until somebody taps the photo five times in a second.
  */
 export function Pomsky({ up }: { up: boolean }) {
   return (
     <span className="pomsky" aria-hidden="true">
-      <m.span className="pomsky__dog" initial={false} animate={{ y: up ? '0%' : '92%' }} transition={snap}>
+      <m.span className="pomsky__dog" initial={false} animate={{ y: up ? '0%' : '105%' }} transition={snap}>
         <svg viewBox="0 0 160 150" className={up ? 'is-up' : ''}>
           <path d="M30 150 Q26 118 44 104 L116 104 Q134 118 130 150 Z" fill="#eceae6" />
           <g className="pomsky__ear pomsky__ear--l">
@@ -56,7 +56,7 @@ export function Pomsky({ up }: { up: boolean }) {
   )
 }
 
-/** Its "woof!", drawn in front of the glass so the glazing bars don't cut through it. */
+/** Its "woof!" */
 export function PomskyWoof({ up }: { up: boolean }) {
   return (
     <AnimatePresence>

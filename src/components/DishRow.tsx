@@ -1,6 +1,5 @@
 import type { MenuItem } from '../data/menu'
 import { money } from '../lib/format'
-import { AddButton } from './AddButton'
 
 /** One line of the menu: name, what's in it, price(s) and a + for each price. */
 export function DishRow({ item, size = 'small', note }: { item: MenuItem; size?: 'big' | 'small'; note?: { quote: string; by: string } }) {
@@ -38,7 +37,6 @@ export function DishRow({ item, size = 'small', note }: { item: MenuItem; size?:
           <div className="dish__price" key={i}>
             {p.label && <span className="dish__label">{p.label}</span>}
             <span className="dish__amount">{money(p.amount)}</span>
-            <AddButton id={item.id} name={item.name} priceIndex={i} label={p.label} size={size} />
           </div>
         ))}
       </div>

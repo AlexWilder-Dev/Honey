@@ -85,6 +85,19 @@
     "fallback": 800,
     "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADQAQCdASoQAAoAA4BaJQBWABbOexGGAAD+8aMxH/ZeFyEEE3uUpJ2M630MZxdMv/Wc3Ri8D/IBg+/CUzSq/9fHjpIHIAAA"
   },
+  "courtyard-crowd": {
+    "alt": "A full courtyard in the early evening: festoon lights, the globe lamp, the hexagon mural and the old brick wing behind",
+    "width": 1500,
+    "height": 2249,
+    "widths": [
+      480,
+      800,
+      1200,
+      1500
+    ],
+    "fallback": 800,
+    "blur": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAAAwBACdASoQABgAPu1iqU2ppaOiMAgBMB2JaACdIIjCdpAnQX9QuNaPdgAA/uJsfAXhPZlZA7dXP/KoKWpb/iBlHh63W1C7d2UHWtM08NbPcwH7Wi54EeYPyGz35Pmpq/zdVKuyYyzeSmYTv307B/PKlJK5bzjg/760HtFMO69hvmPah+pWo1kg6UCpCoQa1DZq7eAA"
+  },
   "courtyard-night": {
     "alt": "The courtyard at night under the globe lamp",
     "width": 1500,

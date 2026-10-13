@@ -33,9 +33,6 @@ export function Eat() {
             From the team behind Dom in Thurlaston, a Great Food Club Restaurant of the Year finalist in 2022/23. Globally inspired plates
             with Asian flavours running through, built for sharing.
           </p>
-          <p className="course__how">
-            <span className="course__plus" aria-hidden="true">+</span> Tap to put a plate on your table. When you book, it goes in the email.
-          </p>
           <Img k="hero-plates" sizes="(min-width: 900px) 34vw, 92vw" position="50% 40%" className="course__photo" />
         </div>
 

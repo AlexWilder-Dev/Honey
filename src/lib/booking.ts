@@ -1,6 +1,5 @@
 import { kitchenHours, venue } from '../data/venue'
 import { clock, londonParts } from './time'
-import { money } from './format'
 
 export type YMD = { y: number; m: number; d: number }
 
@@ -57,7 +56,6 @@ export function isBookable(date: YMD) {
 
 // --- the email -----------------------------------------------------------------
 
-export type Line = { name: string; qty: number; amount: number; label?: string; kind: 'plate' | 'glass' }
 export type Request = {
   date: YMD
   minutes: number
@@ -67,7 +65,6 @@ export type Request = {
   name: string
   phone: string
   notes: string
-  table: Line[]
 }
 
 export const subjectFor = (r: Pick<Request, 'guests' | 'date' | 'minutes'>) =>
@@ -87,16 +84,6 @@ export function bodyFor(r: Request) {
   if (r.seat) rows.push(`Seating: ${r.seat}, if possible`)
   rows.push(`Name: ${r.name}`, `Phone: ${r.phone}`)
   if (r.notes.trim()) rows.push(`Notes: ${r.notes.trim()}`)
-
-  if (r.table.length) {
-    const block = (kind: Line['kind'], title: string) => {
-      const ls = r.table.filter((l) => l.kind === kind)
-      if (!ls.length) return []
-      return [title, ...ls.map((l) => `  ${l.qty} × ${l.name}${l.label ? ` (${l.label.toLowerCase()})` : ''}  ${money(l.amount * l.qty)}`)]
-    }
-    const total = r.table.reduce((n, l) => n + l.amount * l.qty, 0)
-    rows.push('', 'Our table, picked from your menu:', ...block('plate', 'Plates'), ...block('glass', 'Glasses'), `  Total as listed: ${money(total)}`)
-  }
 
   rows.push('', 'Thanks!', r.name)
   return rows.join('\r\n')

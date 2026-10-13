@@ -3,9 +3,8 @@ import { useEffect, useId, useState, type FormEvent } from 'react'
 import { upcoming } from '../data/events'
 import { venue } from '../data/venue'
 import { bodyFor, longDate, mailtoFor, slotsFor, subjectFor, weekday, type Request, type YMD } from '../lib/booking'
-import { money, plural } from '../lib/format'
+import { plural } from '../lib/format'
 import { pour } from '../lib/motion'
-import { useTable } from '../state/table'
 import { useUi, type BookingPreset, type Seat } from '../state/ui'
 import { Calendar } from './Calendar'
 import { Sheet, SheetClose } from './Sheet'
@@ -33,7 +32,6 @@ export function BookingSheet() {
 }
 
 function BookingForm({ preset, onDone }: { preset: BookingPreset; onDone: () => void }) {
-  const table = useTable()
   const ids = { date: useId(), time: useId(), name: useId(), phone: useId(), notes: useId(), guests: useId() }
 
   const [date, setDate] = useState<YMD | null>(null)
@@ -44,7 +42,6 @@ function BookingForm({ preset, onDone }: { preset: BookingPreset; onDone: () => 
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [notes, setNotes] = useState('')
-  const [sendTable, setSendTable] = useState(true)
   const [errors, setErrors] = useState<Errors>({})
   const [sent, setSent] = useState<Request | null>(null)
   const [copied, setCopied] = useState(false)
@@ -79,7 +76,6 @@ function BookingForm({ preset, onDone }: { preset: BookingPreset; onDone: () => 
       name: name.trim(),
       phone: phone.trim(),
       notes,
-      table: sendTable ? table.lines.map((l) => ({ name: l.name, qty: l.qty, amount: l.amount, label: l.label, kind: l.kind })) : [],
     }
   }
 
@@ -270,38 +266,6 @@ function BookingForm({ preset, onDone }: { preset: BookingPreset; onDone: () => 
         </label>
         <textarea id={ids.notes} className="input input--area" rows={3} value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Dietary needs, a pram, bringing the dog…" />
       </div>
-
-      {table.count.all > 0 && (
-        <div className="field attached">
-          <div className="attached__head">
-            <p className="field__label">Your table</p>
-            <label className="toggle">
-              <input type="checkbox" checked={sendTable} onChange={(e) => setSendTable(e.target.checked)} />
-              <span>Send it with the booking</span>
-            </label>
-          </div>
-          <div className={`attached__body ${sendTable ? '' : 'is-off'}`}>
-            <ul>
-              <li className="attached__kind">{plural(table.count.plates, 'plate')}</li>
-              {table.plates.map((l) => (
-                <li key={l.key}>
-                  {l.qty} × {l.name}
-                </li>
-              ))}
-            </ul>
-            <ul>
-              <li className="attached__kind">{plural(table.count.glasses, 'glass', 'glasses')}</li>
-              {table.glasses.map((l) => (
-                <li key={l.key}>
-                  {l.qty} × {l.name}
-                  {l.label && <small> {l.label.toLowerCase()}</small>}
-                </li>
-              ))}
-            </ul>
-            <p className="attached__total">{money(table.total)} as listed</p>
-          </div>
-        </div>
-      )}
 
       <footer className="sheet__foot book__foot">
         {date && minutes !== null && <p className="book__preview">{subjectFor({ guests, date, minutes })}</p>}

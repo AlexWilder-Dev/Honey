@@ -4,9 +4,8 @@ import { scrollToSection } from '../lib/nav'
 import { Drink } from '../sections/Drink'
 import { Eat } from '../sections/Eat'
 import { House } from '../sections/House'
-import { Intro } from '../sections/Intro'
 import { Press } from '../sections/Press'
-import { Shopfront } from '../sections/Shopfront'
+import { Hero } from '../sections/Hero'
 import { Visit } from '../sections/Visit'
 import { WhatsOn } from '../sections/WhatsOn'
 
@@ -26,8 +25,7 @@ export function Home() {
 
   return (
     <>
-      <Shopfront />
-      <Intro />
+      <Hero />
       <Eat />
       <Drink />
       <WhatsOn />

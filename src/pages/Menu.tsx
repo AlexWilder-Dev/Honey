@@ -66,8 +66,7 @@ export function Menu() {
         <h1 className="title title--xl">Small plates, pizzas &amp; the Hive List</h1>
         <p className="lead">“{menuTagline}.”</p>
         <p className="menu__how">
-          Tap + on anything to put it on your table, then book it in one go. V is vegetarian. Allergies or dietary needs? Have a word with
-          the team before you order.
+          V is vegetarian. Allergies or dietary needs? Have a word with the team before you order.
         </p>
       </header>
 
