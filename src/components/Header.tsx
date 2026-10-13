@@ -15,7 +15,7 @@ export function Header() {
         </Link>
         <nav className="header__nav" aria-label="Main">
           <Link to="/menu">Menu</Link>
-          <button type="button" onClick={() => goto('on')}>Diary</button>
+          <button type="button" onClick={() => goto('on')}>What’s on</button>
           <button type="button" onClick={() => goto('house')}>The house</button>
           <button type="button" onClick={() => goto('visit')}>Visit</button>
           <Link to="/christmas">Christmas</Link>

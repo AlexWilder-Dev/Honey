@@ -1,29 +1,63 @@
 {
-  "hero-glass": {
-    "alt": "Two spritzes clinking across the bar",
-    "width": 1500,
-    "height": 2249,
+  "courtyard-crowd": {
+    "alt": "The courtyard on a busy evening: festoon lights, the globe lamp, the hexagon mural and the old brick wing behind",
+    "width": 2500,
+    "height": 3748,
     "widths": [
       480,
       800,
       1200,
-      1500
+      1600,
+      2000,
+      2500
     ],
     "fallback": 800,
-    "blur": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAABQBACdASoQABgAPu1iqk2ppaQiMAgBMB2JbAC7MoADK5wGDKAhyoZrkQ6AAP70MtbOuCCqcM1u3Ll/N8VuxXWCRP2mWJoByYO6e7hu10fksiorT56FlFJsfgwN4ZasCG2L/ElBxB39TPUrUUmyDWfdfz3SfQ50uMJhGueyB+fSiAoX+UVQZLlG6aLfkW3QOLD9lJ8C1ylgAA=="
+    "blur": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAAAQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JaACdIIjCdpgjQeUlEOW6IAD+4mx8BeE9mVkDt1c/8qgpal2INTz+q2pe89DqftgbBIgN3jedKQ6zW3f6K+GuJGeNKeWkqXyq7S85Z/fONTMPOAYjGYN1VfuAmW3mb5uq7qttW7tR06wmMOlxGwGr3iSOKGdLxRpQ+AAA"
+  },
+  "hero-glass": {
+    "alt": "Two spritzes clinking across the bar",
+    "width": 2500,
+    "height": 3748,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600,
+      2000,
+      2500
+    ],
+    "fallback": 800,
+    "blur": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAACQBACdASoQABgAPu1iqk2ppaQiMAgBMB2JbAC7MoGvtgOfjktB3evh3PkxEMgA/vQy1s64IKpwzW7cuX83xW7FdYJE/aZYmgHJg7p7vcoZgupuLkLVaYBdrjE/95w7Zc4rELLFRTyz6TPoNhBTdW4e5sOgm6wOL6NYVDmeOfbIGqX/lHmMFS0L5rfkW3QOLD9l5o7QGAAAAA=="
   },
   "kitchen": {
     "alt": "A pizza and a bowl of ravioli on a wooden table",
-    "width": 1500,
-    "height": 2249,
+    "width": 2500,
+    "height": 3748,
     "widths": [
       480,
       800,
       1200,
-      1500
+      1600,
+      2000,
+      2500
     ],
     "fallback": 800,
-    "blur": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAABQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JagCdMoMrZEma8VzofM8JQsmgAP7y207umea+IpnJVP4yIa35V4mh/E4FId9w2X8HiZe0nPTczkmpQpPm247U2bsxhnEDVa8ISOznQ4/L5T8C+0qLfXRolJMuPNMYe/NxTFruvb/N4fSKewyiwdRBlPgE2AAA"
+    "blur": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAAAQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JagCdACHcjx9WboeeCRSRgAD+8ttO7pnmviKZyVT+MiGt+VeJofxO5HFd/JpL7i98qp5OML42ZgrNmjWeTEXUk4OF7uTCQuB9Ilc2vmCLYTYZMIAzH8G3rwcOW70mb2eXNuJHEscay/5vD7IzcMkVY4uqRE6GTiAAAA=="
+  },
+  "bar": {
+    "alt": "A spritz on a table with a guest smiling behind it",
+    "width": 2500,
+    "height": 3748,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600,
+      2000,
+      2500
+    ],
+    "fallback": 800,
+    "blur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAAAQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JZACsAB6NOoayZiQNUvD9AAD+7EjjgL1KgrRDVCct1bTCy4Ennjlq3Z0uNnDH0RBtpsnzntOueAtnC/3c92e3wHH/MwI8YikeHxnp1hT01lknUPi0Ane/dfeY1O+ebs29StuP85pxkMMveLOXnEkSUN05lolhfVqwSiWsvjoAfJ7gAAA="
   },
   "hero-plates": {
     "alt": "A table covered in sharing plates, seen from above",
@@ -49,29 +83,6 @@
     "fallback": 800,
     "blur": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAABwBACdASoQABgAPu1iqU2ppaOiMAgBMB2JbACdMoAC+/PwzC5T6xum+QzfAAD+6V8lPSFV/nYyfZU7ZGyUD1F2yJ/PSXRwsHRNobS/PdDwy3UM1D8uJ+xwNNLDQbpk9rr6hPMyitaeuL4PYLY3iXd2MW6c4365YXSkAA=="
   },
-  "backbar": {
-    "alt": "The back bar, rope lanterns hanging above the shakers",
-    "width": 1067,
-    "height": 1600,
-    "widths": [
-      480,
-      800,
-      1067
-    ],
-    "fallback": 800,
-    "blur": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAACQBACdASoQABgAPu1iqk2ppaQiMAgBMB2JbACdMoR3ACIRAWawbjyEdNwgvoAA/uxVn19jWnHJ5RmP483PaVEm8PueOC1AkXdHKBm2GSsGXCfxTFzOI4qCzlGS5s5ixDWfenbgfJfu8iesVb1omL3dScfC3xDO1IvQYz1GOKQKcQXZKvy3xq/nafnZOcYAAAA="
-  },
-  "espresso": {
-    "alt": "An espresso martini on the bar",
-    "width": 590,
-    "height": 787,
-    "widths": [
-      480,
-      590
-    ],
-    "fallback": 590,
-    "blur": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAAAwBACdASoQABUAPu1iqU2ppaQiMAgBMB2JZACsACF58gqXb5wNwajTYgAA/vQlNhrdYlCBfEkC7wpQUOcvwQfRb4SGhWgnJ6Bq39k/vb0hWDsID/yJrBLsfN/50BrlTUaS5c7mLOGd8zoFDrpOi9ek30AAAA=="
-  },
   "courtyard-day": {
     "alt": "The courtyard in sunshine: green chairs, timber tables, old brick walls",
     "width": 1500,
@@ -85,31 +96,35 @@
     "fallback": 800,
     "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADQAQCdASoQAAoAA4BaJQBWABbOexGGAAD+8aMxH/ZeFyEEE3uUpJ2M630MZxdMv/Wc3Ri8D/IBg+/CUzSq/9fHjpIHIAAA"
   },
-  "courtyard-crowd": {
-    "alt": "A full courtyard in the early evening: festoon lights, the globe lamp, the hexagon mural and the old brick wing behind",
-    "width": 1500,
-    "height": 2249,
-    "widths": [
-      480,
-      800,
-      1200,
-      1500
-    ],
-    "fallback": 800,
-    "blur": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAAAwBACdASoQABgAPu1iqU2ppaOiMAgBMB2JaACdIIjCdpAnQX9QuNaPdgAA/uJsfAXhPZlZA7dXP/KoKWpb/iBlHh63W1C7d2UHWtM08NbPcwH7Wi54EeYPyGz35Pmpq/zdVKuyYyzeSmYTv307B/PKlJK5bzjg/760HtFMO69hvmPah+pWo1kg6UCpCoQa1DZq7eAA"
-  },
   "courtyard-night": {
     "alt": "The courtyard at night under the globe lamp",
-    "width": 1500,
-    "height": 2249,
+    "width": 2500,
+    "height": 3748,
     "widths": [
       480,
       800,
       1200,
-      1500
+      1600,
+      2000,
+      2500
     ],
     "fallback": 800,
-    "blur": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAABQBACdASoQABgAPu1iqU2ppaQiMAgBMB2JYgCxDHADA1oIDfRewM+EUcSAAP7yrim33wMKMjA+nw6DmNsqqVf29r4fouTXj4IgraXW9RQ76pyYW07zgbsLzzN/QiqUEu5s8wGRnuI1CdHGR7pVeLaCkxZH23nC3Nd0Gy8TBOHjqtu77b5nAAAA"
+    "blur": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAABwBACdASoQABgAPu1kqk4ppaQiMAgBMB2JYgCsIMgDA1+f9X5DjhnBrJtfAAD+8q4pt98DCjGyM+8xJHNIpLBlR4gvE1pu7aK0UJKcWoqcTEtncCClL1amlzO6ZOW4oRZz9xYrPx6UGNjinxdFkQtZzp6oyEYJw/q3L9QiFw30AA=="
+  },
+  "cheers": {
+    "alt": "A guest laughing over a table of drinks in the courtyard at night",
+    "width": 2500,
+    "height": 3748,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600,
+      2000,
+      2500
+    ],
+    "fallback": 800,
+    "blur": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAAAwBACdASoQABgAPu1iqU2ppaQiMAgBMB2JaACw7CHf/D/Z4WwjmrjPVgAA/vQgqwy4xDaiovuTuV+7S3g4gkkY3cRm/gNu+KrVVO2D3bmHTz3a3caSlZTBvAXd1rLxI+O6ZW4ZVCO1RIZ4KS2kHSGM78alIp/o8kAAAA=="
   },
   "upstairs": {
     "alt": "Dinner upstairs in the rear wing, under curved timber braces and fairy lights",
@@ -125,17 +140,19 @@
     "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQAAwAA4BaJZgCdADciJFzxgAA/s9yAsPg9IFHBwHko0xz2+eYgsGiXREJVLTmxlrcG8tVA9eDRGUOLmx+ecyQAAA="
   },
   "upstairs-room": {
-    "alt": "Tables under the old roof timbers, a wall of birch branches lit from below",
-    "width": 1500,
-    "height": 1001,
+    "alt": "The room upstairs under the old roof timbers, a wall of birch branches lit from below",
+    "width": 2500,
+    "height": 1668,
     "widths": [
       480,
       800,
       1200,
-      1500
+      1600,
+      2000,
+      2500
     ],
     "fallback": 800,
-    "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADwAQCdASoQAAsAA4BaJZgCdAEQ+76eDYAA/veHCQHGclBem5rOU42ZposuwHrxOJ87r0Rc0kX65AcBJPBcj0fg5G1+AAAA"
+    "blur": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADwAQCdASoQAAsAA4BaJZgCdAEQ+76wgEAA/veHCQHGclBem5X1VL/e+5StBFN5m19Vq/EKAjrGXXcSeC5Ho/ByNr8AAA=="
   },
   "poster-halloween": {
     "alt": "Poster: Basement Presents, Say Less, Dance More. Halloween Hive & Honey Garden Party, Friday 30th Oct, 8pm",

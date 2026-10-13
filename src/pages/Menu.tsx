@@ -67,14 +67,11 @@ export function Menu() {
   return (
     <main className="menu on-light" id="main">
       <header className="wrap menu__head">
-        <p className="kicker-row">
-          <span className="no">The menu</span>
-          <span>Eat &amp; drink</span>
-        </p>
-        <h1 className="headline">
+        <span className="label">Menu</span>
+        <h1 className="title title--xl">
           Small plates, pizzas <em>&amp; the Hive List</em>
         </h1>
-        <p className="standfirst">“{menuTagline}.”</p>
+        <p className="story__lede">{menuTagline}.</p>
         <p className="menu__how">
           V is vegetarian. Allergies or dietary needs? Have a word with the team before you order.
         </p>

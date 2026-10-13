@@ -36,11 +36,12 @@ const plain = (font, text, x, y, size, fill, opacity = 1) => {
 // "Hive" set in from the left, "Honey" below, a swash ampersand between them:
 // the arrangement on their signage and printed menus.
 function wordmark(x, y, size, ink = CREAM, amp = HONEY) {
-  const lead = size * 0.86
-  const hive = path(roman, 'Hive', x + size * 0.62, y, size)
+  // same lockup as the site: Hive set in, the ampersand tucked under the "iv"
+  const lead = size * 0.98
+  const hive = path(roman, 'Hive', x + size * 0.7, y, size)
   const honey = path(roman, 'Honey', x, y + lead, size)
-  const ampSize = size * 0.74
-  const and = path(italic, '&', x + size * 0.98, y + lead * 0.56, ampSize)
+  const ampSize = size * 0.6
+  const and = path(italic, '&', x + size * 1.3, y + size * 0.5, ampSize)
   return `<path d="${hive}" fill="${ink}"/><path d="${honey}" fill="${ink}"/><path d="${and}" fill="${amp}"/>`
 }
 
@@ -74,39 +75,32 @@ function monogram(ox, oy, r, ink, amp, stroke) {
 }
 
 // ---------- og.jpg ----------
-// Their courtyard photo on the left, the masthead on paper on the right.
+// Their courtyard edge to edge, the name over it, as on the site's opening screen.
 const W = 1200, H = 630
-const display = (() => {
-  const b = readFileSync('node_modules/@fontsource/libre-caslon-display/files/libre-caslon-display-latin-400-normal.woff')
-  return opentype.parse(b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength))
-})()
-const photoW = 560
 const photo = await sharp('public/media/site/R5_HIVE_085.JPG')
   .rotate()
-  .resize({ width: 820 })
-  .extract({ left: 150, top: 330, width: photoW, height: H })
+  .resize({ width: W })
+  .extract({ left: 0, top: 820, width: W, height: H })
   .toBuffer()
 
-const x0 = photoW + 56
-const mast = (text, font, x, y, size, fill) => `<path d="${path(font, text, x, y, size)}" fill="${fill}"/>`
-const sans = (text, x, y) => plain(display, text, x, y, 16, CHAR, 0.8)
-const panel = `
+const size = 132
+const overlay = `
 <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
-  <rect width="${W}" height="${H}" fill="${CREAM}"/>
-  <rect x="${x0}" y="70" width="${W - x0 - 56}" height="1.5" fill="${CHAR}"/>
-  ${sans('NO. 42 SILVER STREET · LEICESTER', x0, 56)}
-  ${mast('Hive', display, x0 - 4, 236, 150, CHAR)}
-  ${mast('&', italic, x0 + 300, 236, 120, HONEY)}
-  ${mast('Honey', display, x0 - 4, 384, 150, CHAR)}
-  <rect x="${x0}" y="430" width="${W - x0 - 56}" height="4" fill="${CHAR}"/>
-  <rect x="${x0}" y="438" width="${W - x0 - 56}" height="1.5" fill="${CHAR}"/>
-  ${plain(italic, 'Cocktails, sharing plates', x0, 492, 34, CHAR)}
-  ${plain(italic, '& a courtyard round the back.', x0, 534, 34, CHAR)}
+  <defs>
+    <linearGradient id="shade" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0.35" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.66"/>
+    </linearGradient>
+  </defs>
+  <rect width="${W}" height="${H}" fill="url(#shade)"/>
+  ${wordmark(64, 440, size, '#ffffff', DOOR)}
+  ${plain(italic, 'Cocktails and sharing plates', 760, 520, 30, '#ffffff')}
+  ${plain(italic, 'at 42 Silver Street, Leicester.', 760, 558, 30, '#ffffff')}
 </svg>`
 
-await sharp(Buffer.from(panel))
-  .composite([{ input: photo, top: 0, left: 0 }])
-  .jpeg({ quality: 88, mozjpeg: true })
+await sharp(photo)
+  .composite([{ input: Buffer.from(overlay), top: 0, left: 0 }])
+  .jpeg({ quality: 86, mozjpeg: true })
   .toFile('public/og.jpg')
 
 const meta = await sharp('public/og.jpg').metadata()

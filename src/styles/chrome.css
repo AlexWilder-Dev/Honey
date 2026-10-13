@@ -333,12 +333,10 @@
   display: grid;
 }
 .dish {
-  padding: 12px 0 13px;
+  padding: 14px 0 15px;
   border-bottom: 1px solid var(--rule);
 }
-.dish:first-child {
-  border-top: 1px solid var(--rule);
-}
+
 .dish__line {
   display: flex;
   align-items: baseline;
@@ -375,17 +373,13 @@
 .dish__leader {
   flex: 1;
   min-width: 18px;
-  margin: 0 10px;
-  border-bottom: 1.5px dotted var(--soft);
-  transform: translateY(-0.28em);
-  opacity: 0.7;
 }
 .dish__prices {
   display: flex;
   gap: 14px;
   flex: none;
-  font: 500 0.98rem/1 var(--sans);
-  font-variant-numeric: tabular-nums;
+  font: 400 1.05rem/1 var(--serif);
+  font-variant-numeric: lining-nums tabular-nums;
 }
 .dish__label {
   margin-right: 6px;

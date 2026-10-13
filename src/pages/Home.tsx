@@ -3,9 +3,11 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { scrollToSection } from '../lib/nav'
 import { Drink } from '../sections/Drink'
 import { Eat } from '../sections/Eat'
-import { House } from '../sections/House'
 import { Press } from '../sections/Press'
-import { Cover } from '../sections/Cover'
+import { Hero } from '../sections/Hero'
+import { Intro } from '../sections/Intro'
+import { Interlude } from '../sections/Interlude'
+import { Spaces } from '../sections/Spaces'
 import { Visit } from '../sections/Visit'
 import { WhatsOn } from '../sections/WhatsOn'
 
@@ -25,11 +27,13 @@ export function Home() {
 
   return (
     <>
-      <Cover />
+      <Hero />
+      <Intro />
       <Eat />
       <Drink />
+      <Interlude />
+      <Spaces />
       <WhatsOn />
-      <House />
       <Press />
       <Visit />
     </>
